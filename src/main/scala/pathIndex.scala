@@ -76,7 +76,7 @@ abstract  class Ifs
  * @param path  для создания экземпляра используем полный путь к дирректории */
 final class Ifolder(path: String) extends Ifs {
 
-  /** создание экземпляра директории */
+  /** создание экземпляра File для директории */
   private val pathTab = new java.io.File(path)
   /** Список вложенных папок */
   private var inFoldersNames = ListBuffer[String]()
@@ -189,7 +189,9 @@ object IfolderDemo {
 
   println("время создания списков :  " + duration + " микросекунд")
 
-
+  // topic создание пустой дирректории
+  val f = new java.io.File("/home/vitaliy/Desktop/a3425566777");
+  f.mkdirs()
 
 
 }

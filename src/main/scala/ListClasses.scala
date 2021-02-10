@@ -1,6 +1,8 @@
 
 
-import scala.collection.immutable.List
+import scala.collection.immutable.{List, TreeMap, TreeSet}
+import scala.collection.mutable
+
 
 // topic 16. Работа со списками
 
@@ -105,6 +107,7 @@ object literalLists {
   println(List.range(1, 5) flatMap (i => List.range(1, i) map (j => (i, j))) )
   val list4 = List(1,2,3,4,5,6)
   println(list4.map(i => i + 1))
+  list4.size
 
   // topic Фильтрация списков
   /** <filter>  Операция xs filter p получает в качестве операндов список xs
@@ -125,11 +128,129 @@ object literalLists {
 
   /** <takeWhile >  Операция xs takeWhile p получает самый длинный префикс списка xs,
                 в котором каждый элемент удовлетворяет условию предиката p */
-
   println(List(1, 2, 3, -4, 5, 6, 7, 8) takeWhile (_ > 0))
+
+  /** <dropWhile> операция xs dropWhile p удаляет самый длинный префикс из списка xs, в
+                котором каждый элемент удовлетворяет условию предиката p */
+  println(List(1, 2, 3, -4, 5, 6, 7, 8) dropWhile (_ > 0))
+
+  /** <span>      объединяет takeWhile и dropWhile в одну операцию точно так же,
+                как метод splitAt объединяет stake и drop. Он возвращает пару из двух списков */
+  println(List(1, 2, 3, -4, 5, 6, 7, 8) span (_ > 0))
+  val(al, bl) = List(1, 2, 3, -4, 5, 6, 7, 8) span (_ > 0)
+  println("al = " + al)
+  println("bl = " + bl)
+
+  /** <forall>  xs forall p получает в качестве аргументов список xs и
+                предикат p. Она возвращает результат true, если все элементы
+                списка удовлетворяют условию предиката p */
+  println( bl forall (i => i > 0) )
+  /** <exists>  xs exists p возвращает true, если в xs имеется элемент,
+                удовлетворяющий условию предиката p */
+  println(bl.exists(_ == -4))
+
+
+
+  def sum(xs: List[Int]): Int = (0 /: xs) (_ + _)
+
+  println(sum(bl))
+  println(("" /: words) (_ + " " + _))
+  println((words.head /: words.tail) (_ + " " + _))
+
+  val m: Array[String] = Array.fill(5)("a")
+
+  // topic Сортировка списков
+  /** <sortWith>  Операция xs sortWith before, где xs является списком, а
+                before — функцией, которая может использоваться для сравнения
+                двух элементов, выполняет сортировку элементов списка xs. */
+  println( List(1, -3, 4, 2, 6) sortWith (_ < _) )
+  println( words sortWith (_.length > _.length) )
+
+  // topic 16.8. Методы объекта List
+  /** <List.apply> Создание списков из их элементов */
+  println(List.apply(1, 2, 3))
+
+  val squares = List.tabulate(5)(n => n * n)
+  println("squares = " + squares)
+  println(List.concat(List('a', 'b'), List('c')))
+
+// topic Строки, реализуемые посредством StringOps
+  def hasUpperCase(s: String) = s.exists(_.isUpper)
+  println(hasUpperCase("Robert Frost"))
+  println(hasUpperCase("e e cummings"))
 
 
 }
+
+
+// topic 17.2. Наборы и отображения
+object demoSet {
+
+  // topic Использование наборов
+  val text = "See Spot run. Run, Spot. Run!"
+  val wordsArray = text.split("[ !,.]+")
+  val words = mutable.Set.empty[String]
+  for (word <- wordsArray) words += word.toLowerCase
+  println("words = " + words)
+  println("words = " + words.mkString(" "))
+
+  // topic Применение отображений
+  def countWords(text: String) = {
+    val counts = mutable.Map.empty[String, Int]
+    for (rawWord <- text.split("[ ,!.]+")) {
+      val word = rawWord.toLowerCase
+      val oldCount =
+        if (counts.contains(word))
+          counts(word)
+        else 0
+      counts += (word -> (oldCount + 1))
+    }
+    counts
+  }
+
+  println(countWords(text))
+
+  // topic Отсортированные наборы и отображения
+  /** Отсортированные наборы */
+  val ts = TreeSet(9, 3, 1, 8, 0, 2, 7, 4, 6, 5)
+  println(ts)
+  val cs = TreeSet('f', 'u', 'n')
+  println(cs)
+
+  val mts = mutable.TreeSet(9,8,7,6,5,0)
+  println(mts)
+  mts += 2
+  mts += 0
+  println(mts)
+  /** Отсортированные отображения */
+  var tm = TreeMap(3 -> 'x', 1 -> 'x', 4 -> 'x')
+  println(tm)
+  tm += (2 -> 'x')
+
+  // topic 17.5. Кортежи
+  /**  поиск самого длинного слова в коллекции и
+      возвращающий наряду с ним его индекс */
+  def longestWord(words: Array[String]) = {
+    var word = words(0)
+    var idx = 0
+    for (i <- 1 until words.length)
+      if (words(i).length > word.length) {
+        word = words(i)
+        idx = i
+      }
+    (word, idx)
+  }
+
+  val longest = longestWord("The quick brown fox".split(" "))
+  println(longest._1 + " " + longest._2)
+  /** Кроме того, значение каждого элемента кортежа может быть присвоено своей собственной переменной */
+  val (word, idx) = longest
+  println(word + " " + idx)
+
+
+}
+
+
 
 
 object findList {

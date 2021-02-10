@@ -10,5 +10,5 @@ object testCaseClasses extends App{ exprDemo }
 
 object testliteralLists extends App { literalLists }
 
-
+object demoSetTest extends App{ demoSet }
 
