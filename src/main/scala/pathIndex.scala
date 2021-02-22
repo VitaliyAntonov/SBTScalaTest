@@ -4,6 +4,7 @@
 import scala.collection.mutable.ListBuffer
 
 /**
+ * класс java.io.File описание: http://proglang.su/java/io-and-files-and-directories-file-class
  * Инструментарий для индексирования файловой системы
  *
  * Связанные индексы для файлов
@@ -62,6 +63,7 @@ import scala.collection.mutable.ListBuffer
  */
 
 
+
 /**
  * базовый класс Ifs Индекс файловой системы
  */
@@ -74,7 +76,7 @@ abstract  class Ifs
  * - При многократном вызове использовать один экземпляр класса
  * чтобы сократить потребление памяти
  * @param path  для создания экземпляра используем полный путь к дирректории */
-final class Ifolder(path: String) extends Ifs {
+final class Ifolder(path: String) extends Ifs{
 
   /** создание экземпляра File для директории */
   private val pathTab = new java.io.File(path)

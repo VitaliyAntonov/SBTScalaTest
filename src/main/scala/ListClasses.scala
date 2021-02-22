@@ -1,5 +1,6 @@
 
 
+
 import scala.collection.immutable.{List, TreeMap, TreeSet}
 import scala.collection.mutable
 
@@ -99,6 +100,7 @@ object literalLists {
                 применяет функцию к каждому элементу списка и возвращает
                 объединение всех результатов выполнения функции. */
   /** Сравнение <map> и <flatMap> */
+  println("=============================  map and flatMap ========================")
   println(words map (_.toList)) // список списков
   println(words flatMap (_.toList)) // слияние в один список
 
@@ -247,8 +249,22 @@ object demoSet {
   val (word, idx) = longest
   println(word + " " + idx)
 
+  Timer(500) { println("Timer went off") }
 
 }
+
+object Timer {
+  def apply(interval: Int, repeats: Boolean = true)(op: => Unit) {
+    val timeOut = new javax.swing.AbstractAction() {
+      def actionPerformed(e : java.awt.event.ActionEvent) = op
+    }
+    val t = new javax.swing.Timer(interval, timeOut)
+    t.setRepeats(repeats)
+    t.start()
+  }
+}
+
+
 
 
 
@@ -263,10 +279,41 @@ object findList {
   match {
     case List() => List(x)
     case y :: ys => if (x <= y) x :: xs
-                    else y :: insert(x, ys)
+    else y :: insert(x, ys)
+  }
+}
+
+// topic Листинг 19.1. Базовая функциональная очередь
+class Queue[T] private (
+                         private val leading: List[T],
+                         private val trailing: List[T]
+                       ) {
+  private def mirror =
+    if (leading.isEmpty)
+      new Queue(trailing.reverse, Nil)
+    else
+      this
+
+  def head = mirror.leading.head
+
+  def tail = {
+    val q = mirror
+    new Queue(q.leading.tail, q.trailing)
   }
 
+  def enqueue(x: T) =
+    new Queue(leading, x :: trailing)
 }
+
+// Листинг 19.3. Фабричный метод apply в объекте-спутнике
+object Queue {
+  // создает очередь с исходными элементами xs
+  def apply[T](xs: T*) = new Queue[T](xs.toList, Nil)
+}
+
+
+// topic
+
 
 
 
