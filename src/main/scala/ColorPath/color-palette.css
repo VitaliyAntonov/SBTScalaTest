@@ -1,0 +1,227 @@
+/************************ ПАЛИТРА ЦВЕТОВ ***********************/
+
+:root{
+    /** Определения цвета **/
+    --bodyBackColor:  #29363C;
+    /** Цвет фона всплывающей подсазки **/
+    --toolTipBackColor: #384952;
+    --toolTipColor: #CDD1D4
+
+}
+
+
+/** a5a7a3  **/
+body {
+  background-color: #29363C;
+  color: #F4F4F4;
+  outline-color: #0409a0 ;
+}
+
+h1 .af_panelBox_header-element{
+color #CDD1D4 !important;
+}
+
+/** цвета в окнах админки **/
+.af_inputText_content,.portlet-form-input-field {
+color:#efeaf0;
+background-color: #384952;
+outline-color: #0409a0 ;
+}
+
+.af_treeTable,.af_table {background-color:#384952;
+border:0.1px solid #CeD3Da;
+}
+
+.af_column_data-cell {
+color: #B4B4B4 ;
+background-color:#384952;
+}
+
+/** topic фон выпадающих списков в правом верхнем углу админки админки **/
+.af_selectManyChoice_control {background-color:#627a87;}
+
+BODY,.portlet-section-body,.portlet-table-body {background-color:#617c84;}
+
+.AFPopupMenuPopup {background-color:#63768a;}
+
+.af_selectManyChoice{
+background-color:#627a87;
+}
+.af_selectManyChoice_content{
+background-color:#627a87;
+}
+.p_AFHighlighted af_selectManyChoice_item{
+background-color:#627a87;
+}
+.af_selectManyChoice_item{
+color: #fae4f1;
+background-color:#627a87;
+}
+.af_selectManyChoice_content {
+color:#fae4f1;}
+
+/** topic вкладка уведомления Админки - цвет заголовков **/
+h1 {color:  #e7e9ea;}
+
+/** topic журнал системных событий поля даты и времени **/
+.af_inputDate_content{
+color:  #f0eaef ;
+background-color: #608189;
+}
+
+/** topic админка вкладка настройки спин-бокс  **/
+.af_inputNumberSpinbox_content{
+color:  #f0eaef ;
+background-color: #608189;
+}
+
+/** topic админка всплывающая подсказка **/
+div.AFNoteWindowHintText{
+background-color: #628481;
+}
+
+/** topic Изменённый цвет выделенного пункта таблицы админки **/
+.af_column_data-cell:hover{
+background-color: #21292C;
+color: #CDDD4
+}
+/** topic Изменённый цвет наведённого пункта **/
+.af_commandMenuItem.p_AFHighlighted .af_commandMenuItem_menu-item-text,.af_commandMenuItem.p_AFHighlighted .af_commandMenuItem_menu-item-accelerator,.af_commandMenuItem.p_AFHighlighted .af_commandMenuItem_menu-item-open-indicator,.af_goMenuItem.p_AFHighlighted .af_goMenuItem_menu-item-text,.af_goMenuItem.p_AFHighlighted .af_goMenuItem_menu-item-accelerator,.af_goMenuItem.p_AFHighlighted .af_goMenuItem_menu-item-open-indicator,.af_menu.p_AFHighlighted .af_menu_submenu-text,.af_menu.p_AFHighlighted .af_menu_submenu-accelerator,.af_menu.p_AFHighlighted .af_menu_submenu-open-indicator,.af_commandMenuItem.p_AFHighlighted .af_commandMenuItem_menu-item-icon-style,.af_goMenuItem.p_AFHighlighted .af_goMenuItem_menu-item-icon-style,.af_menu.p_AFHighlighted .af_menu_submenu-icon-style,.af_table_data-row.p_AFHighlighted .af_column_data-cell,.af_table_data-row.p_AFHighlighted .af_column_banded-data-cell,.CommandToolbarButton_RichComman_feecc49b.af_commandToolbarButton:hover,.CommandToolbarButton_RichComman_feecc49b.af_commandToolbarButton.p_AFTextOnly:hover {
+background-color:#21292C;
+}
+/** topic Border элементов таблиц **/
+.af_column_column-header-cell {color:#fdf2f8;border-right:1px solid #CaD0D2;
+border-bottom:1px solid #cbd1d3;
+}
+.af_table_data-table-VH-lines .af_column_data-cell,.af_table_data-table-VH-lines .af_column_banded-data-cell
+{border-right:1px solid #c0cfca; border-bottom:1px solid #c4cdcf}
+
+
+.CommandToolbarButton_RichComman_feecc49b .af_commandToolbarButton_text {color:#ded8e0;}
+
+
+/**.af_inputText_content {
+;color:#000000;
+border:1px solid #fafbfc;} **/
+
+
+.af_panelHeader_title-table,.af_showDetailHeader_title-table {
+background:#384952;border-bottom:1px solid #384952;color:#B4B4B4;
+}
+
+.af_menu_bar-item-text,.af_commandMenuItem_bar-item-text,.af_goMenuItem_bar-item-text {
+color:#B4B4B4;
+}
+
+a {color:#CDD1D4;}
+
+/* Цвет фона */
+.MetroBodyBackground:alias {
+	background: #21292C;  /** --- **/
+}
+
+/* Цвет фона в попапе */
+.MetroPanelWindowBackground:alias {
+	background: #21292C; /** ---  **/
+}
+
+/* Цвет затемнения */
+.MetroModalGlassPaneBackground:alias {
+	background-color:#21292C; /** --- **/
+	opacity: 0.7;
+}
+
+/* Цвет блока */
+.MetroBlockBackground:alias {
+	background: #384952;          /** --- **/
+	border: 1px solid #384952; /** --- **/
+}
+
+/* Цвет header блока */
+.MetroBlockHeaderBackground:alias {
+	background: #384952;  /** ---  **/
+}
+
+/* Нижняя граница header блока и цвет текста */
+.MetroBlockHeaderBorderBottom:alias {
+	border-bottom: 1px solid #B4B4B4);  /** todo ??? **/
+	color: #f9fafb;  /** ---  **/
+}
+
+/* Цвет и/или граница блока низ */
+.MetroBlockFooterBackground:alias {
+	border-top: 1px solid #B4B4B4; /** todo ??? **/
+}
+
+/* Цвет границы в panelBox */
+.MetroPanelBoxBorder:alias {
+	border: 1px solid #384952; /** --- **/
+}
+.MetroPanelBoxBorderHeader:alias {
+	border-top: 1px solid #384952; /** --- **/
+}
+
+/* Цвет фона заголовка в panelBox */
+.MetroPanelBoxHeaderBackground:alias {
+	background-color: #647D89; /** --- **/
+}
+
+/* Цвет текста заголовка в panelBox IPanelBoxForeground_AF panelBoxHeaderForeground*/
+.MetroPanelBoxHeaderFont:alias {
+	color: #fdf2f8; /** --- #fdf2f8 **/
+}
+
+/* Цвета кнопок baseColor*/
+/* background on buttons. */
+.AFButtonBackground:alias {
+	background-color: #647D89; /** --- **/
+}
+
+/* background on buttons in active mode (mouse down). */
+.AFButtonBackgroundActive:alias { /*IButtonBackgrundActive_AF*/
+	background-color: #98b0c9; /** --- **/
+}
+
+/* background on buttons in disabled mode. */
+.AFButtonBackgroundDisabled:alias { /*IButtonBackgroundDisabled_AF*/
+	background-color: #8C8C8C; /** --- **/
+}
+
+/* background on buttons in hover mode. ILightBackground_AF*/
+.AFButtonBackgroundHover:alias {
+	background-color: #29363C; /** --- **/
+}
+
+/* background on buttons in focus mode. IButtonBackgroundFocus_AF*/
+.AFButtonBackgroundFocus:alias {
+
+}
+
+/* Цвет надписи geo.controller.component.utils.css.oop.attributes.text.LabelTextForeground_AF*/
+.AFLabelTextForeground:alias,
+.AFLabelTextForegroundDisabled:alias {
+	color: #fefdfc; /** --- **/
+}
+
+/* Цвет границ контролов - границы полей ввода текста*/
+.AFFormControlContentBorder:alias {
+	border: 0.1px solid #A29BB1; /**controlBorders**/ /**topic **/
+}
+
+/* Фон или цвет недоступных элементов */
+.MetroDisabled:alias {
+	background-color: #b3bcc4;
+}
+
+/* Цвет иконок на белом фоне */
+.MetroIconOnWhite:alias {
+	background-color: #ff0000;
+}
+
+/** цвет фона активированных строк табличного меню **/
+.af_table_data-row.p_AFSelected.p_AFInactive .af_column_data-cell,.af_tree_data-row.p_AFSelected.p_AFInactive .af_tree_node-stamp-text,.af_tree_data-row.p_AFSelected .af_tree_node-stamp-text {
+background-color: #9a9fa0;
+color: #F1FAfD;
+}
+
+

@@ -28,7 +28,7 @@ class IndexFolder(path: String) extends Iif{
   private def indexer(path: String): (String, Boolean, List[String],List[String]) = {
     val pathTab = new java.io.File(path) // Таблица вложенных
     var fullPathName = path // полный путь к директории
-    val pathYes = pathOK(pathTab) // Флаг наличия дирректории
+    val pathYes: Boolean = pathOK(pathTab) // Флаг наличия дирректории
     val inFoldersNames = ListBuffer[String]() // Список вложенных папок
     val inFilesNames = ListBuffer[String]() // Список вложенных файлов
     if(pathYes){
@@ -59,7 +59,7 @@ object IndexFolder {
 object testIndexFolder{
 
   val nf = new IndexFolder(".")
-  val nf2 = IndexFolder(".")
+  val nf2: IndexFolder = IndexFolder(".")
 
 
   println(nf.inFoldersNames.mkString(" "))
@@ -81,6 +81,14 @@ object MyTask {
 class MyTask extends TimerTask {
   override def run(): Unit = {
     System.out.println("timer iteration: " + {MyTask.i += 1; MyTask.i})
+
+    /** topic ДЕЛАТЬ ! Выборка из буфера обмена с обработкой исключения */
+    val x = clipboardString.get /** Текст из буфера обмена */
+
+
+
+
+    println(x)
   }
 }
 
@@ -88,9 +96,24 @@ object Test {
   def main(args: Array[String]): Unit = {
     val timer = new Timer
     val task = new MyTask
-    timer.schedule(task, 0, 500) // 2000 - delay (can set to 0 for immediate execution), 5000 is a frequency.
+    timer.schedule(task, 0, 2000) // 2000 - delay (can set to 0 for immediate execution), 5000 is a frequency.
   }
 }
+
+
+//object clipboardString {
+//  @throws[IOException]
+//  @throws[UnsupportedFlavorException]
+//  @throws[InterruptedException]
+//  def get: String = {
+//    val clipboard = Toolkit.getDefaultToolkit.getSystemClipboard
+//    /** Забираем строку из буфера обмена * */
+//    val flavor = DataFlavor.stringFlavor
+//    if (clipboard.isDataFlavorAvailable(flavor)) clipboard.getData(flavor).asInstanceOf[String]
+//    else ""
+//  }
+//}
+
 
 
 

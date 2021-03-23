@@ -1,0 +1,95 @@
+package ColorPath;
+
+/**
+ * @author Виталий Антонов @date 13.03.21
+ *
+ * Цвета проекта Altius
+ **/
+
+
+import java.awt.Color;
+
+public class AltiusColor extends Color{
+    /** при наследовании затребован конструктор **/
+    public AltiusColor(int r, int g, int b) {
+        super(r, g, b);
+    }
+
+    /** Тестовый цвет **/
+    public static Color testColor = new Color(57,59,56);
+
+    /** Базовые цвета **/
+    public static Color white = new Color(0xFFFFFF);
+    public static Color black = new Color(0x000000);
+    public static Color red = new Color(0xFF0000);
+    public static Color orange = new Color(0xFFB100);
+    public static Color yellow = new Color(0xFFF401);
+    public static Color green = new Color(0x00FF00);
+    public static Color bluelite = new Color(0x05ECFF);
+    public static Color blue = new Color(0x0000FF);
+    public static Color purple = new Color(0xC100FF);
+    public static Color gray = new Color(180,180,180);
+
+    /** ------------------- Неопределившиеся при тестах ---------------------------- **/
+    public static Color rejected = new Color(230, 46, 0); // тёмно-красный
+    public static Color accepted = new Color(0, 179, 0); // тёмно-зелёный
+    public static Color toSave = new Color(88, 251, 186); // светло-зелёный
+    public static Color acceptedWithRemarks = new Color(230, 230, 0); // тёмно-жёлтый
+    public static Color anotherIncomingControlRequired = new Color(0, 0, 0); // черный
+    /** Дополнительный цвет границы блока **/
+    public static Color additionalBlockBorder = new Color(0xc05B309); // 210 10 86 c5d0db
+    /** Граница таблицы **/
+    public static Color tableBorder = new Color(0xEC0701);// 228 2 93 e7e8ec
+    /** Во время нажатия **/
+    public static Color active = new Color(211, 24, 79); // 211 24 79
+    /** Фон или цвет основной недоступной кнопки **/
+    public static Color disabledButton = new Color(140,140, 140); // 211 20 80
+    /** Основной цвет фона, на нем расположены блоки формы и панели **/
+    public static Color bodyBackground = black;
+    /** Дополнительный цвет фона, на нем расположены белые плитки **/
+    public static Color additionalBodyBackground = new Color(0xf6f6f6); // светло-серый f6f6f6
+    /** Дополнительный цвет форм (цвет тулбара, заголовок таблиц, заголовок аккордеона) **/
+    public static Color additionalFormBackground = new Color(0xf5f7f7); // 200 1 97 f5f7f7
+    /** Наведенный цвет меню **/
+    public static Color menuHighlighted = new Color(0xe4eaf0); // 210 5 94 e4eaf0
+
+
+
+    /** ---------------------------------------------------------------------------- **/
+
+    /** Прозрачный серый цвет **/
+    public static Color graytrans = new Color(220,220,220,0);
+
+    /** Цвет выделенного меню **/
+    public static Color menuSelected = new Color(0x677a81); // 219 13 88 c4cee0
+
+    /** Основной фон **/
+    public static Color backBaseColor = new Color(0x21292C);
+    /** Основной цвет текста **/
+    public static Color textBaseColor = new Color(255,255,255);
+
+    /** Меню **/
+    /** Фон неактивных ссылок меню **/
+    public static Color linkMenuBackColor = new Color(0x384952);
+    /** Текст неактивных ссылок меню **/
+    public static Color linkMenuTextColor = new Color(0xCDD1D4);
+    /** Фон наведённых(hover) ссылок меню **/
+    public static Color linkHoverMenuBackColor = new Color(0x29363C);
+    /** Текст наведённых(hover) ссылок меню **/
+    public static Color lincHoverMenuTextColor = new Color(0x00F8E0);
+    /** Фон вкладок(панелей) меню **/
+    public static Color panelMenuBackColor = new Color(0x384952);
+    /** Бледно зелёный **/
+    public static Color greenLite = new Color(0xC3FFE3);
+    /** Фон заголовков служебных окон **/
+    public static Color winTaskHeaderColor = new Color(0xF4F4F4);
+    /** Фон кнопок на формах **/
+    public static Color buttonBackColor = new Color(0x647D89);
+
+    /** --------------------------------  Из дизайна Figma ------------------------------ **/
+    /** фон поля для ввода текста  **/
+    public static Color inputFormBackColor = new Color(0x29363C);
+}
+
+
+

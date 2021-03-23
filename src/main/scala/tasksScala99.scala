@@ -109,9 +109,9 @@ object tasksScala0 {
     val t1_ns: Long = System.nanoTime()
     for(i <- 0 until nCycle)  f
     val t2_ns: Long = System.nanoTime()
-    println(f + " время работы функции : " + (t2_ns - t1_ns)  / nCycle + " наноосекунд")
+    println(f + " время работы функции : " + (t2_ns - t1_ns)  / nCycle + " наносекунд")
   }
-  def nonFu(a: Int): Int = { val b = a + 1; b }
+  def nonFu(a: Int): Int = a + 1
 
 //  fixTimeInCycle(isPalindromeS(List(1,2,2,2,2,21,34,56)),100000)
   fixTimeInCycle(nonFu(1),1000)
@@ -132,7 +132,50 @@ object tasksScala0 {
   val x = List.fill(5)(2)
   println(x)
 
+  /** P07 (**) Сглаживание структуры вложенного списка.
+   * scala> flatten(List(List(1, 1), 2, List(3, List(5, 8))))
+   * res0: List[Any] = List(1, 1, 2, 3, 5, 8)
+   */
+    /** пример с сайта */
+  def flatten(ls: List[Any]): List[Any] = ls flatMap {
+    case ms: List[_] => flatten(ms)
+    case e => List(e)
+  }
 
+  println("==================  flatten  ======================")
+  val as = flatten(List(List(1, 1), 2, List(3, List(5, 8))))
+  println(as)
+
+  /** P08 (**) Устранение последовательных дубликатов элементов списка.  -мой */
+  def compress(ls: List[Any]): List[Any] = {
+    import scala.collection.mutable.ListBuffer
+    if (ls.nonEmpty) {
+      val lb = ListBuffer[Any]()
+      var lbnum = 0
+      lb += ls(0)
+      for (i <- 0 until ls.size) {
+        if (lb(lbnum) != ls(i)) {
+          lb += ls(i); lbnum += 1
+        }
+      }
+      lb.toList
+    }
+    else Nil
+  }
+  /** Рекурсивный с сайта */
+  def compressTailRecursive[A](ls: List[A]): List[A] = {
+    def compressR(result: List[A], curList: List[A]): List[A] = curList match {
+      case h :: tail => compressR(h :: result, tail.dropWhile(_ == h))
+      case Nil       => result.reverse
+    }
+    compressR(Nil, ls)
+  }
+
+
+  val rlb = compress (List ('a','a','a','a','b','c','c','a','a','d','e','e','e','e'))
+  val rlb1 = compress (List ())
+  println(rlb1.mkString(" "))
+  println(compress(Nil).mkString(""))
 
 }
 
