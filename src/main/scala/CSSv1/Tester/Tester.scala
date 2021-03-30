@@ -1,7 +1,5 @@
 package CSSv1
 
-import CSSv1.Tags.Align
-
 
 /** Тест синтаксиса цепочек **/
 
@@ -22,11 +20,12 @@ case class Chain(x: String){
   def solid = Chain(this + "solid ")
 }
 
-trait OrderVar extends CSS{
+/** трейт для переменных общего доступа **/
+trait TestOrderVar extends CSS{
   var order = ""
 }
 
-class Order extends CSS with OrderVar{
+class TestOrder extends CSS with TestOrderVar{
   def new_property = {order += "new-property "; this}
 }
 
@@ -34,7 +33,7 @@ class Order extends CSS with OrderVar{
 
 /** Цепочка со встроенным буфером **/
 //object ChainVar
-class ChainVar(var str:String ="") extends CSS with Align{
+class ChainVar(var str:String ="") extends CSS{
   override def toString: String = str
   val myValue = 2021
   /** За методом закреплён определённый string **/
@@ -47,7 +46,7 @@ object ChainTest{
   val myValue = 2021
   /** Цепочка с буфером **/
   val chBuf = new ChainVar
-//  chBuf.new_property.new_attribute.new_value
+  chBuf.new_property.new_attribute.new_value
   println(chBuf)
   println(classOf[ChainVar].getName ) /** Извлечение имени класса с цепочкой от корня пакета **/
   println(classOf[ChainVar].getSimpleName ) /** Извлечение имени класса */
@@ -69,6 +68,60 @@ class Cell[T](init: T) {
   def set(x: T) = { current = x }
 }
 
+/** Основные типы для сочетания тегов **/
+trait CSSRulesOldVersion extends CSS{
+  object Property /** тег начинает строку ордера */
+  type Property
+  object Attribute /** после Property */
+  type Attribute
+  object CSSValue
+  type CSSValue
+  object NoType
+  type NoType
+  object StartOrder
+  type StartOrder
+  object EndOrder
+  type EndOrder
+  object Selector
+  type Selector
+
+  def select(s:Any): Any = s match {
+    case _ : Property => Property
+    case _ : Attribute => Attribute
+    case _ : CSSValue => CSSValue
+    case _ : NoType => NoType
+    case _ => throw new NoSuchElementException("Не определён тип в правилах CSSRules")
+  }
+}
+
+/** Селекция типов SCALA профессиональное программмирование стр.611 */
+class Food
+abstract class Animal {
+  type SuitableFood <: Food
+  def eat(food: SuitableFood)
+}
+
+// Листинг 20.10. Реализация абстрактного типа в подклассе
+class Grass extends Food
+class Cow extends Animal {
+  type SuitableFood = Grass
+  override def eat(food: Grass) = {}
+}
+
+/** пример правильного полиморфизма **/
+/** При вызове сработает тот метод, к классу которого принадлежит обрабатываемый объект
+ * при вызове принадлежность объекта неизвестна   */
+class Base{
+  def printType = println("Base")
+}
+
+class Base1 extends Base{
+  override def printType: Unit = println("Base1")
+}
+
+class Base2 extends Base1{
+  override def printType:Unit = println("Base2")
+}
 
 
 

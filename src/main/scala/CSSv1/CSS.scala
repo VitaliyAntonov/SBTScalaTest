@@ -1,74 +1,74 @@
 package CSSv1
 
-/** постфиксная нотация **/
-import scala.language.postfixOps
 
+
+
+
+import CSSv1.Tags.{AlignOrder, AlignVRules}
+
+import scala.language.postfixOps /** постфиксная нотация **/
+
+
+/** обощающий класс для всего пакета CSS */
 abstract class CSS
 
-/** Основные типы для сочетания тегов **/
-trait CSSRules extends CSS{
-  object Property /** тег начинает строку ордера */
-  type Property
-  object Attribute /** после Property */
-  type Attribute
-  object CSSValue
-  type CSSValue
-  object NoType
-  type NoType
-  object StartOrder
-  type StartOrder
-  object EndOrder
-  type EndOrder
-  object Selector
-  type Selector
+/** трейт для значений общего доступа класса Order **/
+trait OrderVRules extends CSS with AlignVRules{
+  /** Строка(буфер) для формирования ордера  */
 
-  def select(s:Any): Any = s match {
-    case _ : Property => Property
-    case _ : Attribute => Attribute
-    case _ : CSSValue => CSSValue
-    case _ : NoType => NoType
-    case _ => throw new NoSuchElementException("Не определён тип в правилах CSSRules")
+  var thisType:String = ""
+  var nextType:String = ""
+  /** Типы всех элементов строк CSS */
+
+  val CSSNewOrder = "CSSNewOrder"     /** Начало ордера */
+  val CSSNewRow = "CSSNewRow"         /** Начало строки */
+  val CSSEndRow = CSSNewRow           /** Окончание строки */
+  val CSSEndOrder = "CSSEndOrder"     /** Окончание ОРДЕРА */
+  val CSSProperty = "CSSProperty"     /** Свойства - пишутся в начале строки - после них двоеточие */
+  val CSSAttribute = "CSSAttribute"   /** Атрибуты - теги пишутся после свойств - после них точка с запятой */
+  val CSSValue = "CSSValue"           /** Числа - пишутся после свойств - после них есть или нет единицы измерения */
+  val CSSDefVar = CSSProperty         /** Определение константы - пишется в начале строки */
+  val CSSUseVar = "CSSUseVar"         /** Использование константы - пишется после нескольких видов тегов */
+}
+
+/** Трейт служит корнем для всех CSS тегов */
+trait ReferencesCSS extends CSS with AlignOrder
+
+/** Order Формирует несколько строк CSS кода, заключённые в фигурные скобки */
+class Order(var order:String = "") extends CSS with OrderVRules with ReferencesCSS{
+//  override var order = ""
+  override def toString: String = order
+
+  /** Метод проверяет пришедшие теги CSS */
+  def tagSelect(tag: String, thisT: String, nextT: String) = {
+    if(nextType != thisT) throw new NoSuchElementException(s"Тег: $tag \n Ожидаемый тип: $thisType \n Пришедший тип: $thisT")
+    else {
+      thisType = thisT; nextType = nextT  // следующий тег
+      thisType match {
+        case CSSNewRow =>  endRow
+        case CSSEndRow => endRow
+        case CSSProperty => tagProperty(tag)
+        case CSSAttribute => tagAttribute(tag)
+        case _ => throw new NoSuchElementException(s"Не определён тип CSS тега $thisType")
+      }
+    }
+
+    tagProperty(tag)
+    this
   }
-}
 
-/** по типу определяем корректность последовательности тегов
- * от класса TypeRules наследуем подтипы */
-class TypeRules
-/** каждому тегу CSS назначаем тип **/
-abstract class CSSTag extends CSS{
-  type TagType <: TypeRules
-  def get(tag: TagType)
-  /**  Типы определяют правила для построения CSS **/
-
-  /** Имя тега в CSS коде */
-  val name:String
-  /** Тип допустимого предыдущего тега */
-  val preType:Any
-  /** Тип текущего тега */
-  val thisType:Any
-  /** Тип допустимого следующего тега */
-  val nextType:Any
-}
-
-/** Формирует несколько строк CSS кода, заключённые в кавычки */
-class Order(var str:String ="{") extends CSS{
-  override def toString: String = str
+  /** implicit def int2Fraction(n: Int) = Fraction(n, 1) */
+  def tagProperty(name: String) = {order += name + ": "; this}
+  def tagAttribute(name: String) = {order += name + ";"; this}
+  def endRow = {order += "\n"; nextType = CSSProperty; this}
+  def newRow = {order += "\n"; nextType = CSSProperty; this}
+  def newOrder = {order += "{"; nextType = CSSProperty; this}
+  def endOrder = {order += "}"}
 
 }
-
-trait CSSTags extends CSS with Outline{
-
-}
-
-trait OutlineRules extends CSS{
-  object OutlineAttribute
-  type OutlineAttribute
-}
-
-trait Outline extends CSS with CSSRules{
-
-//  def outline_style = new CSSTag("outline-style", Selector, Property, OutlineAttribute)
-//  def none = new CSSTag("display", Property, OutlineAttribute, Selector)
+object Order extends CSS with OrderVRules with ReferencesCSS{
+  /** Предыдущий, текущий и ожидаемый типы тегов */
+  def apply = new Order
 }
 
 
@@ -76,14 +76,19 @@ trait Outline extends CSS with CSSRules{
 
 
 
+object myCSSOrderTest{
+
+
+
+  println("Hello CSS!")
+  val order1 = Order
 
 
 
 
 
+  println(order1)
 
-
-
-
+}
 
 

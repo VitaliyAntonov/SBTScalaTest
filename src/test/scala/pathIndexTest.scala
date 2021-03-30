@@ -1,6 +1,10 @@
 import CSS.Grid.CSSTest
 import CSS.testCssTypes
-import CSSv1.ChainTest
+import CSSv00.CSSIeTest
+import CSSv01.{CSSv01_Test, HierarchyTest5}
+import CSSv1.SortCats.ImplicitCodeTest
+import CSSv1.Tester.selectTest
+import CSSv1.{ChainTest, myCSSOrderTest}
 //import org.stairwaybook.simulation._
 
 
@@ -34,4 +38,18 @@ object demoCSS_Test extends App{ CSSTest }
 object demotestCssTypes extends App{ testCssTypes }
 
 object demoChainTest extends App{ ChainTest }
+
+object CSSOrderTest extends App{ myCSSOrderTest }
+
+object RunImplicitCodeTest extends App{ ImplicitCodeTest }
+
+object RunselectTest extends App{ selectTest }
+
+object RunCSSIeTest extends App{ CSSIeTest }
+
+object RunCSSv01_Test extends App{ CSSv01_Test }
+
+object RunHierarchyTest5 extends App{ HierarchyTest5 }
+
+
 

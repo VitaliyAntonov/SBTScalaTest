@@ -1,24 +1,39 @@
 package CSSv1.Tags
 
-import CSSv1.{CSS, OrderVar}
+import CSSv1.{CSS, Order, OrderVRules}
+
+/**  */
+/** Трейт собирает все CSS теги для Align */
+trait AlignOrder extends CSS with AlignProperty with AlignAttribute
+
+/** Содержит селекторы типов для Align тегов. Подмешивается в OrderVRules*/
+trait AlignVRules extends CSS{
+  object CSSAlignProperty
+  type CSSAlignProperty
+  object CSSAlignAttribute
+  type CSSAlignAttribute
+}
+
+/** Свойства Align (в начале строки ордера - следующее двоеточие)  */
+trait AlignProperty extends CSS with OrderVRules {
 
 
-trait Align extends CSS with OrderVar{
+  def align_items(x: Order) = x.tagSelect("align-items", CSSProperty, CSSAttribute )
+  def align_content(x: Order) = x.tagSelect("align-content", CSSProperty, CSSAttribute )
 
-  def align_items = {order += "align-items "; this} // переменная вынесена в трейт
+
+}
+
+/** Атрибуты (в конце строки ордера - следующее двоеточие) для Align */
+trait AlignAttribute extends CSS with OrderVRules {
+
+
+  def stretch(x: Order) = x.tagSelect("stretch", CSSAttribute, CSSEndRow)
+
+  /** Блок прижат к верху поперечной оси */
+  def flex_start(x: Order) = x.tagSelect("flex-start", CSSAttribute, CSSEndRow)
 
 }
 
 
-//class AlignProperty extends TypeRules
-//class align_content extends CSSTag{
-//  type TagType = AlignProperty
-//  /** Имя тега в CSS коде */
-//  override val name: String = "align-content"
-//  /** Тип допустимого предыдущего тега */
-//  override val preType: Selector = _
-//  /** Тип текущего тега */
-//  override val thisType: Any = _
-//  /** Тип допустимого следующего тега */
-//  override val nextType: Any = _
-//}
+
