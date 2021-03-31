@@ -1,7 +1,7 @@
 import CSS.Grid.CSSTest
-import CSS.testCssTypes
+
 import CSSv00.CSSIeTest
-import CSSv01.{CSSv01_Test, HierarchyTest5}
+import CSSv01.{HierarchyTest5}
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
@@ -35,7 +35,7 @@ object demoXML_Test extends App{ testXml }
 
 object demoCSS_Test extends App{ CSSTest }
 
-object demotestCssTypes extends App{ testCssTypes }
+
 
 object demoChainTest extends App{ ChainTest }
 
@@ -47,7 +47,7 @@ object RunselectTest extends App{ selectTest }
 
 object RunCSSIeTest extends App{ CSSIeTest }
 
-object RunCSSv01_Test extends App{ CSSv01_Test }
+
 
 object RunHierarchyTest5 extends App{ HierarchyTest5 }
 

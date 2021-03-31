@@ -1,9 +1,7 @@
 package CSS.Grid
 
-import CSS._
 
-
-class Grid extends CSS {
+class Grid {
 
   /** css Свойства для контейнера **/
   /**

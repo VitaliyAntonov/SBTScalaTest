@@ -6,28 +6,28 @@ package CSS
  * за пределами границ, чтобы выделить элемент.
  * Свойство является сокращенным свойством для:
  */
-trait outline extends CSS{
-  def outline_style = new Property("outline-style")
-
-  def none = new Attribute("display")
-  def hidden = new Attribute("hidden")
-  def dotted = new Attribute("dotted")
-  def dashed = new Attribute("dashed")
-  def solid = new Attribute("solid")
-  def double = new Attribute("double")
-  def groove = new Attribute("groove")
-  def ridge = new Attribute("ridge")
-  def inset = new Attribute("inset")
-  def outset = new Attribute("outset")
-
-  /** initial используется для установки свойства CSS значения по умолчанию.
-   * initial можно использовать для любого свойства CSS и для любого элемента HTML. */
-  def initial = new Attribute("initial")
-  def inherit = new Attribute("inherit")
-
-  def outline_width = new Property("outline-width")
-  def outline_color = new Property("outline-color")
-}
+//trait outline{
+//  def outline_style = new Property("outline-style")
+//
+//  def none = new Attribute("display")
+//  def hidden = new Attribute("hidden")
+//  def dotted = new Attribute("dotted")
+//  def dashed = new Attribute("dashed")
+//  def solid = new Attribute("solid")
+//  def double = new Attribute("double")
+//  def groove = new Attribute("groove")
+//  def ridge = new Attribute("ridge")
+//  def inset = new Attribute("inset")
+//  def outset = new Attribute("outset")
+//
+//  /** initial используется для установки свойства CSS значения по умолчанию.
+//   * initial можно использовать для любого свойства CSS и для любого элемента HTML. */
+//  def initial = new Attribute("initial")
+//  def inherit = new Attribute("inherit")
+//
+//  def outline_width = new Property("outline-width")
+//  def outline_color = new Property("outline-color")
+//}
 
 
 object myString
