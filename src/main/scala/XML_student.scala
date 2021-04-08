@@ -21,6 +21,7 @@ object testXml{
     val bookPrice = 2199
     val purchasePrice = 500
     val condition = 9
+
   }
   /**  <toXML> topic фиксация полей объета в XML **/
   println( therm.toXML )

@@ -1,10 +1,10 @@
 import CSS.Grid.CSSTest
-
 import CSSv00.CSSIeTest
-import CSSv01.{HierarchyTest5}
+import CSSv01.HierarchyTest5
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
+import SiteCreator.html.htmlGen
 //import org.stairwaybook.simulation._
 
 
@@ -51,5 +51,5 @@ object RunCSSIeTest extends App{ CSSIeTest }
 
 object RunHierarchyTest5 extends App{ HierarchyTest5 }
 
-
+object RunhtmlGen extends App{ htmlGen }
 
