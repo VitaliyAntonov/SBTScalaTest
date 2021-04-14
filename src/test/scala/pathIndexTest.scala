@@ -4,7 +4,8 @@ import CSSv01.HierarchyTest5
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
-import SiteCreator.html.htmlGen
+import siteCreator.htmlGen
+import siteCreator.pages.testPC
 //import org.stairwaybook.simulation._
 
 
@@ -52,4 +53,6 @@ object RunCSSIeTest extends App{ CSSIeTest }
 object RunHierarchyTest5 extends App{ HierarchyTest5 }
 
 object RunhtmlGen extends App{ htmlGen }
+
+object RuntestPC extends App{ testPC }
 
