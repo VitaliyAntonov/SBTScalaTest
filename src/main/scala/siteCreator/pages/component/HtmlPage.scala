@@ -4,6 +4,12 @@ import siteCreator.pages.HtmlPC
 
 
 /**
+ * @author Виталий Антонов @date 4/17/21
+ *         kaligraf@yandex.ru
+ * */
+
+
+/**
  * Компонент - шаблон HTML страницы
  *
  * @param namePage Имя страницы
@@ -13,16 +19,18 @@ class HtmlPage(namePage: String)(args: Component*)
   extends Component("HtmlPage" + namePage) {
 
   override def html(page: HtmlPC)  = {
-  val header =
-    s"""|<html>
+  lazy val header =
+    s"""|<!DOCTYPE html>
+        |<html>
        |  <head>
        |    <meta charset="utf-8">
        |    <title>${page.namePage}</title>
        |    <link rel="stylesheet" href=${s""""${page.namePage + "style.css"}""""}>
        |  </head>
-       |  <body>""".stripMargin
+       |  <body>
+       |""".stripMargin
 
-  val footer =
+  lazy val footer =
   s"""|    <script defer src=${s""""${page.namePage + "script.js"}""""}></script>
        |  </body>
        |</html>
@@ -36,12 +44,22 @@ class HtmlPage(namePage: String)(args: Component*)
 
   def cssTemplate =
     s"""
-       |${HtmlCom.root.cssTemplate("")}
+       |${HtmlCom.root.cssTemplate}
+       |
+       |body {
+       |    background-color: var(--bodyBgColor);
+       |    color: var(--bodyTextColor);
+       |}
        |""".stripMargin
 
   def jsTemplate(id:String = ""): String =
     s"""
        |
        |""".stripMargin
+}
+
+object HtmlPage{
+  val csshelp = new HtmlPage("csshelp")()
+
 }
 

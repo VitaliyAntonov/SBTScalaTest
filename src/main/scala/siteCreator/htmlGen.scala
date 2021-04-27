@@ -1,7 +1,7 @@
 
 package siteCreator
 
-import siteCreator.pages.component.{HtmlCom, HtmlPage}
+import siteCreator.pages.component.HtmlCom
 
 import java.io.PrintWriter
 
@@ -48,9 +48,9 @@ object htmlGen{
   }
 
 
-  val testPage = new HtmlPage("Test")(
-    HtmlCom.divBox,
-    HtmlCom.divBox)
+//  val testPage = new HtmlPage("Test")(
+//    Divs.divBox,
+//    HtmlCom.divBox)
 
 
 

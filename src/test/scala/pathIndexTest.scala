@@ -6,6 +6,7 @@ import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
 import siteCreator.htmlGen
 import siteCreator.pages.testPC
+import siteCreatorV0.TagTest
 //import org.stairwaybook.simulation._
 
 
@@ -55,4 +56,7 @@ object RunHierarchyTest5 extends App{ HierarchyTest5 }
 object RunhtmlGen extends App{ htmlGen }
 
 object RuntestPC extends App{ testPC }
+
+
+object RunTagTest extends App{ TagTest }
 

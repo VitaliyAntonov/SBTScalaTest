@@ -7,6 +7,11 @@ import scala.Array.ofDim
 import scala.collection.mutable.ArrayBuffer
 
 
+/**
+ * @author Виталий Антонов @date 4/17/21
+ *         kaligraf@yandex.ru
+ * */
+
 
 object Order{
   protected class Order{var buffer = ""}

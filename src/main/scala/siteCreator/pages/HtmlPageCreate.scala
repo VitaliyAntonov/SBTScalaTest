@@ -1,6 +1,9 @@
 package siteCreator.pages
 
-import siteCreator.pages.component.{Component, HtmlCom}
+
+import siteCreator.pages.component._
+
+import java.io.PrintWriter
 
 /**
  * Класс для создания HTML страницы
@@ -39,7 +42,25 @@ class HtmlPC(val namePage: String){
    */
   def +(x: Component) = {x.html(this); this}
 
-
+  /** Сохранение шаблонов в файл */
+  def save = {
+    val folder = "PublicHtml/"
+    if(this.htmlFile.html.nonEmpty){
+      val out = new PrintWriter(folder + this.namePage + ".html")
+      out.println(this.htmlFile.html)
+      out.close()
+    }
+    if(this.cssFile.css.nonEmpty){
+      val out = new PrintWriter(folder + this.cssFile.fileName + ".css")
+      out.println(this.cssFile.css)
+      out.close
+    }
+    if(this.jsFile.js.nonEmpty){
+      val out = new PrintWriter(folder + this.jsFile.fileName + ".js")
+      out.println(this.jsFile.js)
+      out.close
+    }
+  }
 }
 
 
@@ -48,8 +69,10 @@ class HtmlPC(val namePage: String){
 object testPC{
   /** Тестовая страница сайта */
   val page = new HtmlPC("myPageTest")
-  page + HtmlCom.pageTemplate
 
+  page + HtmlCom.pageTemplate /** Добавляем в буфер html шаблон страницы */
+
+  page.save
 
   println(page.namePage)
   println(page.htmlFile.html)
@@ -59,6 +82,7 @@ object testPC{
 
   println(page.jsFileName)
   println(page.jsFile.js)
+
 
 
 }
