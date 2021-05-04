@@ -1,8 +1,8 @@
-
-
-
-
 import scala.collection.mutable
+
+
+//import scala.collection.mutable._
+//import scala.collection.parallel.mutable
 
 /** topic 24. Углубленное изучение коллекций */
 
@@ -60,23 +60,23 @@ object mapTest{
   val z: mutable.Map[Int, Char] = mutable.Map() ++ y
   println(z)
 
-  val e: mutable.Map[Int, Char] = y.to(mutable.Map)
-  e(3)='G'
-  println(e)
+//  val e: mutable.Map[Int, Char] = y.to(mutable.Map)
+//  e(3)='G'
+//  println(e)
 
   /** Диапазоны */
   val diapazon: Range = 1 to 5
   println("diapazon = " + diapazon)
 
   /** topic Потоки */
-  val str0 = 1 #:: 2 #:: 3 #:: Stream.empty
-  val str = 1 #:: 2 #:: 3 #:: LazyList.empty
-  println(str)
-  /** обход элементов потока */
-  for(i <- 0 until str.size) println(str(i))
-  str foreach print; println()
-  str.foreach(print); println()
-  str.foreach(arg => print(arg + " ")); println()
+//  val str0 = 1 #:: 2 #:: 3 #:: Stream.empty
+//  val str = 1 #:: 2 #:: 3 #:: LazyList.empty
+//  println(str)
+//  /** обход элементов потока */
+//  for(i <- 0 until str.size) println(str(i))
+//  str foreach print; println()
+//  str.foreach(print); println()
+//  str.foreach(arg => print(arg + " ")); println()
 
   /** topic 24.10 МАССИВЫ */
   /** способ создания обобщенных массивов

@@ -1,10 +1,11 @@
 import CSS.Grid.CSSTest
 import CSSv00.CSSIeTest
 import CSSv01.HierarchyTest5
+import CSSv01.Tags.mapTester
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
-import siteCreator.htmlGen
+import siteCreator.pages.component.testerAnimTag
 import siteCreator.pages.testPC
 import siteCreatorV0.TagTest
 //import org.stairwaybook.simulation._
@@ -33,7 +34,7 @@ object demoTasksScala0 extends App{ tasksScala0 }
 
 object demoMapTest extends App{ mapTest }
 
-object demoXML_Test extends App{ testXml }
+
 
 object demoCSS_Test extends App{ CSSTest }
 
@@ -53,10 +54,15 @@ object RunCSSIeTest extends App{ CSSIeTest }
 
 object RunHierarchyTest5 extends App{ HierarchyTest5 }
 
-object RunhtmlGen extends App{ htmlGen }
+
 
 object RuntestPC extends App{ testPC }
 
 
 object RunTagTest extends App{ TagTest }
 
+object RunmapTester extends App{ mapTester }
+
+
+
+object RuntesterAnimTag extends App{ testerAnimTag }

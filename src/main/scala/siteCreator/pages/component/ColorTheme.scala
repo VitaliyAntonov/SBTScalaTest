@@ -1,6 +1,7 @@
 package siteCreator.pages.component
 
 import java.awt.Color
+import scala.collection.mutable.ArrayBuffer
 
 
 /**
@@ -33,6 +34,7 @@ abstract class ColorTheme{
 
   def bodyBgColor: String
   def bodyTextColor: String
+
 }
 
 /**  */
@@ -51,6 +53,16 @@ class ColorBasicTheme extends ColorTheme{
   override def bodyBgColor: String = toRGB(black)
   /** Основной цвет текста страницы */
   override def bodyTextColor = toRGB(white)
+
+  /** Box Tag Hover Colors - цвет анимированных по hover контейнеров */
+  val bthc = ArrayBuffer[(String, String)]()
+  /** Цвет фона боксов анимированных по hover тегов */
+  bthc += tagBoxBgColor
+  lazy val tagBoxBgColor = ("tagBoxBgColor", "#184055")
+  /** Цвет текста анимированных по hover тегов */
+  def tagBoxTextColor = "#fdc879"
+  /** Цвет бордюра боксов анимированных по hover тегов */
+  def tagBoxBorderColor = "#00FF00"
 
 }
 

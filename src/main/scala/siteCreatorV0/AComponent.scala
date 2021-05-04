@@ -66,7 +66,7 @@ object TagTest{
   p.testLb += "p2"
   println(p.testLb.length)
   println(p.testLb.mkString(" "))
-  p.testLb.dropRightInPlace(1)
+//  p.testLb.dropRightInPlace(1)
   println(p.testLb.length)
   println(p.testLb.mkString(" "))
 

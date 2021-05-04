@@ -99,6 +99,16 @@ abstract class Component(val componentName: String) extends Enumeration {
   /** Добавляем к имени компонента имя вложенного под-компонента */
   def cNamePlus(plus: String) = componentName + plus
 
+  /** Замена символа - на символ _ в тегах CSS */
+  def nameToScala(name: String): String = {
+    var s = ""
+    for(i <- 0 until name.length){
+      val sim = name.slice(i, i+1)
+      if(sim != "-") s += sim
+      else s += "_"
+    }
+    s
+  }
 
 }
 
