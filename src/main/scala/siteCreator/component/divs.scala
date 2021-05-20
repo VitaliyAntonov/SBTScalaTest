@@ -1,6 +1,6 @@
-package siteCreator.pages.component
+package siteCreator.component
 
-import siteCreator.pages.HtmlPC
+import siteCreator.HtmlPC
 
 
 /**
@@ -16,7 +16,7 @@ import siteCreator.pages.HtmlPC
  */
 class Divs(nameDiv: String = "")(args: Component*)(cssProperty: String*) extends Component("Div" + nameDiv) {
 
-  var numDefHtml = 0
+  var numDefHtml = 0 // счётчик обращений к методу html
 
   override def html(page: HtmlPC)  = {
     val id = componentId /** Фиксируем id */
@@ -39,17 +39,14 @@ class Divs(nameDiv: String = "")(args: Component*)(cssProperty: String*) extends
          |""".stripMargin
 
 
-    addHml(page, htmlHead)
+    addHtml(page, htmlHead)
     addArgs(page)(args: _*)
-    addHml(page, htmlFooter)
+    addHtml(page, htmlFooter)
   }
 
   def cssTemplate(id:String = ""): String =
     s"""
        |#$id {
-       |  width: 200px;
-       |  height: 200px;
-       |  background-color: hsl(220, 34%, 50%);
        |}""".stripMargin + "\n"
 
   def jsTemplate(id:String = ""): String = ""
@@ -68,9 +65,8 @@ object Divs {
   def apply(name: String)(args: Component*)(cssProperty: String*) = new Divs(name)(args: _*)(cssProperty: _*)
 
   /** Пробный контейтер */
-  val divBox = Divs("Box")()("border: 1px solid yellow;",
+  val divBox = new Divs("Box")()("border: 1px solid yellow;",
                              "border-radius: 5px;")
-
 
 
 }

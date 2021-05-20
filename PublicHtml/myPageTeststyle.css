@@ -1,7 +1,7 @@
 
 :root {
-   --bodyBgColor: rgb(0, 0, 0);
-   --bodyTextColor: rgb(255, 255, 255);
+   --bodyBgColor: #000000;
+   --bodyTextColor: #ffffff;
 }
 
 body {

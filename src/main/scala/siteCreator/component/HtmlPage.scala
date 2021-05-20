@@ -1,6 +1,6 @@
-package siteCreator.pages.component
+package siteCreator.component
 
-import siteCreator.pages.HtmlPC
+import siteCreator.HtmlPC
 
 
 /**
@@ -37,9 +37,9 @@ class HtmlPage(namePage: String)(args: Component*)
        |""".stripMargin
 
     addCss(page, cssTemplate) /** Добавляем CSS шаблон */
-    addHml(page, header) /** Добавляем верх страницы */
+    addHtml(page, header) /** Добавляем верх страницы */
     addArgs(page)(args: _*) /** Создание HTML последовательности для вложенных элементов */
-    addHml(page, footer) /** Добавляем низ страницы */
+    addHtml(page, footer) /** Добавляем низ страницы */
   }
 
   def cssTemplate =
@@ -59,7 +59,7 @@ class HtmlPage(namePage: String)(args: Component*)
 }
 
 object HtmlPage{
-  val csshelp = new HtmlPage("csshelp")()
+
 
 }
 

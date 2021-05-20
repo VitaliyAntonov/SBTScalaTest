@@ -1,6 +1,6 @@
-package siteCreator.pages.component
+package siteCreator.component
 
-import siteCreator.pages.HtmlPC
+import siteCreator.HtmlPC
 
 /**
  * @author Виталий Антонов @date 4/17/21

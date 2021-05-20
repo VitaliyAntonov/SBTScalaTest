@@ -1,7 +1,6 @@
-package siteCreator.pages.component
+package siteCreator.component
 
-import siteCreator.pages._
-import siteCreator.pages.component.Divs._
+import siteCreator.HtmlPC
 
 
 /**
@@ -11,7 +10,7 @@ import siteCreator.pages.component.Divs._
 
 
 
-/** Перечень ссылок */
+/** Перечень ссылок на компоненты */
 object HtmlCom extends Enumeration {
   lazy val fixButton = new FixButton("Test")
 
@@ -20,7 +19,22 @@ object HtmlCom extends Enumeration {
   lazy val root = new RootCss(actColorTheme)
 
   /** Пробный шаблон страницы */
-  lazy val pageTemplate = new HtmlPage("TemplateTest")(divBox, divBox)
+  lazy val pageTemplate = new HtmlPage("TemplateTest")(Divs.divBox, Divs.divBox)
+
+  /** ----------------------------------------------------------------------- */
+  /** Шаблон страницы помощи по CSS тегам */
+  lazy val helpCss = new HtmlPage("helpCss")(
+    /** создание контейнеров букв алфавита */
+    literaBoxes
+  )
+
+  /** Контейнеры букв алфавита для страницы helpCss анимированных тегов */
+  lazy val literaBoxes = new literaBoxes
+
+  /** Анимированные теги для страницы helpCss */
+  lazy val aTags = new animTags("helpCssTags")()
+  /** ----------------------------------------------------------------------- */
+
 }
 
 /**
@@ -40,7 +54,7 @@ abstract class Component(val componentName: String) extends Enumeration {
    * @param page - буферы создаваемой HTML страницы
    * @param x - стринг HTML, который необходимо добавить
    */
-  def addHml(page: HtmlPC, x: String) = {
+  def addHtml(page: HtmlPC, x: String) = {
     page.htmlFile.html += x
   }
   /** ============================ */

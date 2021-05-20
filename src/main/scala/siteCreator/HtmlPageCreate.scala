@@ -1,7 +1,6 @@
-package siteCreator.pages
+package siteCreator
 
-
-import siteCreator.pages.component._
+import siteCreator.component.{Component, HtmlCom}
 
 import java.io.PrintWriter
 
@@ -68,11 +67,26 @@ class HtmlPC(val namePage: String){
 /** Тестирование класса создания файлов HTML страницы */
 object testPC{
   /** Тестовая страница сайта */
-  val page = new HtmlPC("myPageTest")
+//  val page = new HtmlPC("myPageTest")
+//
+//  page + HtmlCom.pageTemplate /** Добавляем в буфер html шаблон страницы */
+//
+//  page.save
+//
+//  println(page.namePage)
+//  println(page.htmlFile.html)
+//
+//  println(page.cssFileName)
+//  println(page.cssFile.css)
+//
+//  println(page.jsFileName)
+//  println(page.jsFile.js)
 
-  page + HtmlCom.pageTemplate /** Добавляем в буфер html шаблон страницы */
-
-  page.save
+  /** Три команды для создания и сохранения html страницы и CSS, JS файлов к ней */
+  val page = new HtmlPC("helpCss")
+  page + HtmlCom.helpCss    // Здесь формируется сама страница
+  page.save                 // Сохранение страницы в папку PublicHtml
+  /** -------------------------------------------------------------------------- */
 
   println(page.namePage)
   println(page.htmlFile.html)
@@ -82,8 +96,6 @@ object testPC{
 
   println(page.jsFileName)
   println(page.jsFile.js)
-
-
 
 }
 

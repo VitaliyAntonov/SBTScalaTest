@@ -1,7 +1,6 @@
-package siteCreator.pages.component
+package siteCreator.component
 
 import java.awt.Color
-import scala.collection.mutable.ArrayBuffer
 
 
 /**
@@ -11,12 +10,22 @@ import scala.collection.mutable.ArrayBuffer
 
 
 abstract class ColorTheme{
+  /** Цвет в CSS формат RGB */
   def toRGB(x: Color): String = {s"""rgb(${x.getRed}, ${x.getGreen}, ${x.getBlue})"""}
-  def toHex(x: Color): String = {
+  /** Цвет в CSS формат HexA с указанием прозрачности - длина 4 байта */
+  def toHexA(x: Color): String = {
     val watch = x.getRGB // Здесь байт прозрачности первый
     var a = ((watch >>> 24) | ((watch & 0xFFFFFF) << 8)).toHexString // Ставим прозрачность последним байтом
     val i = 8 - a.length
     if(i > 0) for(k <- 0 until i) { a = "0" + a } // Дополняем нулями до 8-ми знаков
+    "#" + a
+  }
+  /** Цвет в CSS формат Hex - длина 3 байта */
+  def toHex(x: Color): String = {
+    val watch = x.getRGB // Здесь байт прозрачности первый
+    var a = (watch & 0xFFFFFF).toHexString // Убираем прозрачность
+    val i = 6 - a.length
+    if(i > 0) for(k <- 0 until i) { a = "0" + a } // Дополняем нулями до 6-ти знаков
     "#" + a
   }
 
@@ -39,7 +48,7 @@ abstract class ColorTheme{
 
 /**  */
 object ColorTheme {
-  /** Можно добавить новую тему, переопределив класс ColorTheme */
+  /** Здесь Можно добавить новую тему */
   lazy val colorBasicTheme = new ColorBasicTheme
   lazy val colorThemeWhite = new ColorThemeWhite
 }
@@ -50,19 +59,40 @@ object ColorTheme {
 class ColorBasicTheme extends ColorTheme{
 
   /** Цвет фона страницы */
-  override def bodyBgColor: String = toRGB(black)
+  override def bodyBgColor: String = toHex(black)
   /** Основной цвет текста страницы */
-  override def bodyTextColor = toRGB(white)
+  override def bodyTextColor = toHex(white)
 
-  /** Box Tag Hover Colors - цвет анимированных по hover контейнеров */
-  val bthc = ArrayBuffer[(String, String)]()
+  /** ================================================ */
   /** Цвет фона боксов анимированных по hover тегов */
-  bthc += tagBoxBgColor
-  lazy val tagBoxBgColor = ("tagBoxBgColor", "#184055")
+  def color1d2731 = new Color(0x1d2731)
+  def tagBoxBgColor: String = toHex(color1d2731)
+
   /** Цвет текста анимированных по hover тегов */
-  def tagBoxTextColor = "#fdc879"
+  def colorFdc879 = new Color(0xfdc879)
+  def tagBoxTextColor: String = toHex(colorFdc879)
+
+  /** Цвет фона под символами анимированного тега */
+  def tagBoxBgTextColor: String = toHex(red)
+
   /** Цвет бордюра боксов анимированных по hover тегов */
-  def tagBoxBorderColor = "#00FF00"
+  def color6df58d = new Color(0x6df58d)
+  def tagBoxBorderColor: String = toHex(color6df58d)
+
+  /** Цвет фона боксов при hover */
+  def color1D2833 = new Color(0x1D2833)
+  def tagBoxBgHoverColor: String = toHex(color1d2731)
+
+  /** Цвет текста тегов при hover */
+  def colorFED599 = new Color(0xFED599)
+  def tagBoxTextHoverColor: String = toHex(colorFED599)
+
+  /** Цвет бордюра боксов при hover */
+  def colorB0FCC1 = new Color(0xB0FCC1)
+  def tagBoxBorderHoverColor: String = toHex(colorB0FCC1)
+  /** ================================================== */
+
+
 
 }
 
@@ -70,10 +100,17 @@ class ColorBasicTheme extends ColorTheme{
 class ColorThemeWhite extends ColorTheme{
 
   /** Цвет фона страницы */
-  override def bodyBgColor: String = toRGB(white)
+  override def bodyBgColor: String = toHex(white)
   /** Основной цвет текста страницы */
-  override def bodyTextColor = toRGB(black)
+  override def bodyTextColor = toHex(black)
 
 }
+
+object testerColorTheme{
+  val x = ColorTheme.colorBasicTheme.bodyBgColor
+  println(x)
+  println(ColorTheme.colorBasicTheme.bodyTextColor)
+}
+
 
 

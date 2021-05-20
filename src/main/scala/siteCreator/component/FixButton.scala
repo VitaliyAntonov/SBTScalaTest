@@ -1,6 +1,6 @@
-package siteCreator.pages.component
-import siteCreator.pages.HtmlPC
+package siteCreator.component
 
+import siteCreator.HtmlPC
 
 
 /** Единичная кнопка с фиксацией с подложенным чекбоксом */

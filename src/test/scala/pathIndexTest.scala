@@ -5,10 +5,10 @@ import CSSv01.Tags.mapTester
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
-import siteCreator.pages.component.testerAnimTag
-import siteCreator.pages.testPC
+import siteCreator.component.{testerAnimTag, testerColorTheme}
+
+import siteCreator.testPC
 import siteCreatorV0.TagTest
-//import org.stairwaybook.simulation._
 
 
 object testPathIndex extends App{ IfolderDemo }
@@ -50,19 +50,16 @@ object RunselectTest extends App{ selectTest }
 
 object RunCSSIeTest extends App{ CSSIeTest }
 
-
-
 object RunHierarchyTest5 extends App{ HierarchyTest5 }
 
-
-
-object RuntestPC extends App{ testPC }
-
+object RunTestPC extends App{ testPC }
 
 object RunTagTest extends App{ TagTest }
 
 object RunmapTester extends App{ mapTester }
 
-
-
 object RuntesterAnimTag extends App{ testerAnimTag }
+
+
+object RuntesterColorTheme extends App{ testerColorTheme }
+
