@@ -49,7 +49,13 @@ class HtmlPage(namePage: String)(args: Component*)
        |body {
        |    background-color: var(--bodyBgColor);
        |    color: var(--bodyTextColor);
+       |    margin:  0px;
+       |    padding: 0px;
+       |    outline: hidden;
        |}
+       |
+       |* { box-sizing: border-box;}
+       |
        |""".stripMargin
 
   def jsTemplate(id:String = ""): String =

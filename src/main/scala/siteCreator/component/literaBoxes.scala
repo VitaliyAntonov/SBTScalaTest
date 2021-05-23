@@ -12,34 +12,23 @@ import siteCreator.HtmlPC
  */
 class literaBoxes extends Component("literaBoxes") {
 
+  /** Класс с размерами литер */
+  val lbs = new LiteraBoxesSize(13,2)
 
   /**
    * Метод строит HTML шаблон компонента и добавляет шаблоны компонента в CSS и JS файлы
    * @param page имя страницы, которая формируется
    */
   override def html(page: HtmlPC): Unit = {
-    /** Начальный отступ блока литер  от верха материнского контейнера */
-    val top: Int = 20
-    /** Расчётный отступ строки литеры */
-    var topRow: Int = top
-    /** Начальный отступ слева блока литер */
-    val leftColumn1: Int = 20
-    /** Отступ слева 2-го столбца литер */
-    val leftColumn2: Int = 110
-    /** Ширина литеры */
-    var width: Int = 35
-    /** Высота литеры */
-    var height: Int = 35
-    /** Зазор между литерами */
-    var gap: Int = 8
-
     /** Добавляем CSS, Общий для всех литер */
-    addCss(page, literaBoxes.cssForAll)
+    addCss(page, cssForAll)
 
     /** изменяющийся от тега к тегу CSS */
     var css: String = ""
     /** изменяющаяся от тега к тегу координата left */
-    var left: Int = leftColumn1
+    var left: Int = lbs.leftColumn1
+    /** topRow - координата top бокса литеры, изменяющаяся для каждого столбца  */
+    var topRow = lbs.top;
     /** изменяющаяся для каждой литеры количество тегов в базе */
     var tagsQua: Int = 0
     /** изменяющееся имя класса контейнера тегов для литеры */
@@ -52,12 +41,12 @@ class literaBoxes extends Component("literaBoxes") {
       addHtml(page, literaBoxes.contPlus(alphabet(i)))   // Добавили HTML литеры
       /** Проверка столбца букв формирование CSS для left и top */
       if(i < 13) {
-        topRow = (height + gap) * i + top
-        left = leftColumn1
+        topRow = (lbs.height + lbs.gap) * i + lbs.top
+        left = lbs.leftColumn1
       }
       else {
-        topRow = (height + gap) * (i - 13) + top
-        left = leftColumn2
+        topRow = (lbs.height + lbs.gap) * (i - 13) + lbs.top
+        left = lbs.leftColumn2
       }
       css = s""".litera-${alphabet(i)} {left: ${left}px; top: ${topRow}px;}\n""" // сформировали CSS
       addCss(page, css)    // добавили CSS литеры для left и top
@@ -67,15 +56,17 @@ class literaBoxes extends Component("literaBoxes") {
     /** Цикл для прорисовки контейнеров тегов литер */
     for(i <-0 until alphabet.length) { // перебор всех литер
       /** Проверка столбца букв формирование CSS для left и top */
-      if (i < 13) left = leftColumn1
-      else left = leftColumn2
+      if (i < 13) left = lbs.leftColumn1
+      else left = lbs.leftColumn2
       /** Для каждой литеры добавляется контейнер с анимированными тегами
        * имя класса для контейнера формируем здесь и передаём в функцию
        * создания контейнера с тегами. Пример имени: helpCss-litera-a-tags-box
        * имя содержит имя страницы, имя литеры, название бокса.
        * В CSS контейнера определяем координату left */
       classNameLiteraTagsBox = s"""helpCss-litera-${alphabet(i)}-tags-box""" // имя класса для контейнера
+
       /** Для новой справочной системы здесь можно заменить HtmlCom.aTags... */
+
       tagsQua = HtmlCom.aTags.literaTagsBox(page, alphabet(i), classNameLiteraTagsBox,
         10, left + 70)      // Добавили HTML контейнера
 
@@ -108,6 +99,30 @@ class literaBoxes extends Component("literaBoxes") {
        |}
        |""".stripMargin
 
+  /**  CSS для всех литер  */
+  def cssForAll: String =
+    s"""
+       |.litera {
+       |  position: absolute;
+       |  display: flex;
+       |  align-content: center;
+       |  justify-content: center;
+       |  width: ${lbs.width}px;
+       |  height: ${lbs.height}px;
+       |  border-radius: ${lbs.borderRadius}px;
+       |  border: 1px solid green;
+       |  user-select: none;
+       |  cursor: pointer;
+       |  transition: all 50ms ease-in-out;
+       |}
+       |
+       |.litera>span {
+       |  font-size: ${lbs.fontSize}px;
+       |  transition: all 50ms ease-in-out;
+       |}
+       |""".stripMargin
+
+
 }
 
 object literaBoxes{
@@ -123,28 +138,7 @@ object literaBoxes{
     s
   }
 
-  /**  CSS для всех литер  */
-  def cssForAll: String =
-    s"""
-       |.litera {
-       |  position: absolute;
-       |  display: flex;
-       |  align-content: center;
-       |  justify-content: center;
-       |  width: 35px;
-       |  height: 35px;
-       |  border-radius: 8px;
-       |  border: 1px solid green;
-       |  user-select: none;
-       |  cursor: pointer;
-       |  transition: all 50ms ease-in-out;
-       |}
-       |
-       |.litera>span {
-       |  font-size: 22px;
-       |  transition: all 50ms ease-in-out;
-       |}
-       |""".stripMargin
+
 
   /** CSS буквы, меняем цвета, в зависимости от наличия тегов в базе */
   def literaIsEmptyTags(className: String, quaTagsInBase: Int): String = {
@@ -179,5 +173,35 @@ object literaBoxes{
 
 
 }
+
+/**
+ * Координаты размещения букв
+ * @param row  - количество строк для расположения литер
+ * @param column - количество столбцов для расположения литер
+ */
+class LiteraBoxesSize(row: Int, column: Int) {
+
+  /** Начальный отступ блока литер  от верха материнского контейнера */
+  val top: Int = 20
+  /** Начальный отступ слева блока литер */
+  val leftColumn1: Int = 20
+  /** Отступ слева 2-го столбца литер */
+  val leftColumn2: Int = 110
+  /** Ширина литеры */
+  var width: Int = 35
+  /** Высота литеры */
+  var height: Int = 35
+  /** Зазор между литерами */
+  var gap: Int = 8
+  /** Радиус углов рамки */
+  var borderRadius: Int = 8
+  /** Размер шрафта */
+  var fontSize: Int = 22
+
+  /** Для hover */
+
+
+}
+
 
 

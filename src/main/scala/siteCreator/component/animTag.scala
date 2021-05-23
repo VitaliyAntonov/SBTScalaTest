@@ -87,7 +87,7 @@ class animTags(
         addHtml(page,tagInSpan(tags(i)))
 
         /** Формируем CSS с координатой top */
-        tagBoxTop = i * (CSize.boxHeight + CSize.GapY) + CSize.boxTopOffset
+        tagBoxTop = i * (CSize.boxHeight + CSize.GapY) + CSize.boxTop
         val tagBoxTopCss: String =
           s"""\n.${SClass.tagBoxClassName(tags(i))} {top: ${tagBoxTop}px ;}"""
         addCss(page, tagBoxTopCss) // Добавили CSS с координатой TOP
@@ -211,7 +211,7 @@ class animTags(
            |  background-color: ${CColors.tagBoxBgColor};
            |  border-radius: ${CSize.boxBorderRadius}px;
            |  font-size: ${CSize.boxFontSize0}px;
-           |  left: ${CSize.boxLeftOffset}px;
+           |  left: ${CSize.boxLeft}px;
            |  margin-top: ${CSize.GapY}px;
            |  ${CSize.boxTransition}
            |  user-select: none;

@@ -25,8 +25,12 @@ object HtmlCom extends Enumeration {
   /** Шаблон страницы помощи по CSS тегам */
   lazy val helpCss = new HtmlPage("helpCss")(
     /** создание контейнеров букв алфавита */
-    literaBoxes
+//    literaBoxes
+    tabPanel
   )
+
+  /** Панель переключаемых вкладоок */
+  lazy val tabPanel = new SelectPanels("headPBox")("CSS","HTML","JS")
 
   /** Контейнеры букв алфавита для страницы helpCss анимированных тегов */
   lazy val literaBoxes = new literaBoxes
@@ -41,7 +45,7 @@ object HtmlCom extends Enumeration {
  * Класс позволяет создавать конкретные типы компонентов в HTML, CSS и JS файлах
  * @param componentName  Имя компонента
  */
-abstract class Component(val componentName: String) extends Enumeration {
+abstract class Component(val componentName: String) extends Enumeration with Sizes {
   /** ============================ */
   /** ABSTRACT
    * Метод строит HTML шаблон компонента и добавляет шаблоны компонента в CSS и JS файлы
