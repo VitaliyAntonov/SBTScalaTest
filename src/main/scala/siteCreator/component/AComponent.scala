@@ -25,9 +25,16 @@ object HtmlCom extends Enumeration {
   /** Шаблон страницы помощи по CSS тегам */
   lazy val helpCss = new HtmlPage("helpCss")(
     /** создание контейнеров букв алфавита */
-//    literaBoxes
-    tabPanel
+//    literaBoxes // Контейнеры букв алфавита
+//    tabPanel  // панель переключаемых вкладоок
+    listSAB // Вертикальный список с увеличением масштаба Scale Alphabet
+//    winVisible
   )
+
+  lazy val winVisible = new WindowVisible("winV")()("abcdefghijklmnopqrstuvwxyz")
+
+  /** Вертикальный список с увеличением масштаба Scale Alphabet */
+  lazy val listSAB = new ListScale("sab")()("abcdefghijklmnopqrstuvwxyz")
 
   /** Панель переключаемых вкладоок */
   lazy val tabPanel = new SelectPanels("headPBox")("CSS","HTML","JS")
@@ -72,6 +79,15 @@ abstract class Component(val componentName: String) extends Enumeration with Siz
   }
   /** ============================ */
   /**
+   * Добавление JS шаблона компонента в буфер страницы
+   * @param page  - буферы создаваемой HTML страницы
+   * @param x - стринг JS, который необходимо добавить
+   */
+  def addJs(page: HtmlPC, x: String) = {
+    page.jsFile.js += x
+  }
+  /** ============================ */
+  /**
    * Добавление массива вложенных компонентов в буфер страницы.
    * Для каждого компонента вызываем его метод html.
    * @param page  - буферы создаваемой HTML страницы
@@ -106,13 +122,16 @@ abstract class Component(val componentName: String) extends Enumeration with Siz
   }
   /** Генерация ID в виде name + ID */
   def cNameId(name: String = "") = {
-    lazy val x = Value(name)
+    val x = Value(name)
     x.toString + x.id
   }
   /** Множество имён класса */
   def cNames(overClass1: String = "") = {
     componentName + " " + overClass1
   }
+
+  /** Enter */
+  def enter: String = "\n"
 
   /** Добавляем к имени компонента имя вложенного под-компонента */
   def cNamePlus(plus: String) = componentName + plus

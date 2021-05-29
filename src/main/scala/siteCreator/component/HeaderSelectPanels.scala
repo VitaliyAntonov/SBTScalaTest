@@ -189,7 +189,7 @@ class SelectPanels(name: String)(panels: String*) extends Component(name + "STab
            |  width: ${CSize.widthTabPanel};
            |  height: ${CSize.heightTabPanel};
            |  background-color: ${CColors.tabPBgColor};
-           |  border: 1px solid ${CColors.butColor};
+           |  border: 1px solid ${CColors.tabPBorderColor};
            |  visibility: hidden;
            |}
            |""".stripMargin
@@ -251,6 +251,7 @@ class SelectPanels(name: String)(panels: String*) extends Component(name + "STab
 
     /** цвета вкладок панели */
     lazy val tabPBgColor = "#252e33"
+    lazy val tabPBorderColor = butColor
   }
 
 
