@@ -22,31 +22,31 @@ body {
   z-index: 1;
 }
 .sabMarkBox-0 {top: 60px; height: 65px;}
-.sabMarkBox-1 {top: 125px; height: 15px;}
-.sabMarkBox-2 {top: 140px; height: 15px;}
-.sabMarkBox-3 {top: 155px; height: 15px;}
-.sabMarkBox-4 {top: 170px; height: 15px;}
-.sabMarkBox-5 {top: 185px; height: 15px;}
-.sabMarkBox-6 {top: 200px; height: 15px;}
-.sabMarkBox-7 {top: 215px; height: 15px;}
-.sabMarkBox-8 {top: 230px; height: 15px;}
-.sabMarkBox-9 {top: 245px; height: 15px;}
-.sabMarkBox-10 {top: 260px; height: 15px;}
-.sabMarkBox-11 {top: 275px; height: 15px;}
-.sabMarkBox-12 {top: 290px; height: 15px;}
-.sabMarkBox-13 {top: 305px; height: 15px;}
-.sabMarkBox-14 {top: 320px; height: 15px;}
-.sabMarkBox-15 {top: 335px; height: 15px;}
-.sabMarkBox-16 {top: 350px; height: 15px;}
-.sabMarkBox-17 {top: 365px; height: 15px;}
-.sabMarkBox-18 {top: 380px; height: 15px;}
-.sabMarkBox-19 {top: 395px; height: 15px;}
-.sabMarkBox-20 {top: 410px; height: 15px;}
-.sabMarkBox-21 {top: 425px; height: 15px;}
-.sabMarkBox-22 {top: 440px; height: 15px;}
-.sabMarkBox-23 {top: 455px; height: 15px;}
-.sabMarkBox-24 {top: 470px; height: 15px;}
-.sabMarkBox-25 {top: 485px; height: 65px;}
+.sabMarkBox-1 {top: 125px; height: 19px;}
+.sabMarkBox-2 {top: 144px; height: 19px;}
+.sabMarkBox-3 {top: 163px; height: 19px;}
+.sabMarkBox-4 {top: 182px; height: 19px;}
+.sabMarkBox-5 {top: 201px; height: 19px;}
+.sabMarkBox-6 {top: 220px; height: 19px;}
+.sabMarkBox-7 {top: 239px; height: 19px;}
+.sabMarkBox-8 {top: 258px; height: 19px;}
+.sabMarkBox-9 {top: 277px; height: 19px;}
+.sabMarkBox-10 {top: 296px; height: 19px;}
+.sabMarkBox-11 {top: 315px; height: 19px;}
+.sabMarkBox-12 {top: 334px; height: 19px;}
+.sabMarkBox-13 {top: 353px; height: 19px;}
+.sabMarkBox-14 {top: 372px; height: 19px;}
+.sabMarkBox-15 {top: 391px; height: 19px;}
+.sabMarkBox-16 {top: 410px; height: 19px;}
+.sabMarkBox-17 {top: 429px; height: 19px;}
+.sabMarkBox-18 {top: 448px; height: 19px;}
+.sabMarkBox-19 {top: 467px; height: 19px;}
+.sabMarkBox-20 {top: 486px; height: 19px;}
+.sabMarkBox-21 {top: 505px; height: 19px;}
+.sabMarkBox-22 {top: 524px; height: 19px;}
+.sabMarkBox-23 {top: 543px; height: 19px;}
+.sabMarkBox-24 {top: 562px; height: 19px;}
+.sabMarkBox-25 {top: 581px; height: 65px;}
 
 .sabFlexVBox {
   display: flex;
@@ -56,20 +56,20 @@ body {
   left: 0px;
   top: 60px;
   width: 100px;
-  height: 490px;
+  height: 586px;
   border: 1px solid yellow;
   transition: all 50ms ease-in-out;
 }
 
 .sabLiteraInFlex {
   position: relative;
-  left: 30px;
+  left: 40px;
   display: flex;
   align-content: center;
   justify-content: center;
-  width: 15px;
-  height: 15px;
-  font-size: 10px;
+  width: 18px;
+  height: 18px;
+  font-size: 13px;
   border: 1px solid red;
   transition: all 50ms ease-in-out;
 }
@@ -78,7 +78,7 @@ body {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -86,7 +86,7 @@ body {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -94,21 +94,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-0:hover ~ .sabFlexVBox .sabLiteraInFlex-1 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-1:hover ~ .sabFlexVBox .sabLiteraInFlex-1 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -116,21 +116,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-1:hover ~ .sabFlexVBox .sabLiteraInFlex-2 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-2:hover ~ .sabFlexVBox .sabLiteraInFlex-2 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -138,21 +138,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-2:hover ~ .sabFlexVBox .sabLiteraInFlex-3 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-3:hover ~ .sabFlexVBox .sabLiteraInFlex-3 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -160,21 +160,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-3:hover ~ .sabFlexVBox .sabLiteraInFlex-4 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-4:hover ~ .sabFlexVBox .sabLiteraInFlex-4 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -182,21 +182,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-4:hover ~ .sabFlexVBox .sabLiteraInFlex-5 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-5:hover ~ .sabFlexVBox .sabLiteraInFlex-5 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -204,21 +204,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-5:hover ~ .sabFlexVBox .sabLiteraInFlex-6 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-6:hover ~ .sabFlexVBox .sabLiteraInFlex-6 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -226,21 +226,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-6:hover ~ .sabFlexVBox .sabLiteraInFlex-7 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-7:hover ~ .sabFlexVBox .sabLiteraInFlex-7 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -248,21 +248,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-7:hover ~ .sabFlexVBox .sabLiteraInFlex-8 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-8:hover ~ .sabFlexVBox .sabLiteraInFlex-8 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -270,21 +270,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-8:hover ~ .sabFlexVBox .sabLiteraInFlex-9 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-9:hover ~ .sabFlexVBox .sabLiteraInFlex-9 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -292,21 +292,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-9:hover ~ .sabFlexVBox .sabLiteraInFlex-10 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-10:hover ~ .sabFlexVBox .sabLiteraInFlex-10 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -314,21 +314,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-10:hover ~ .sabFlexVBox .sabLiteraInFlex-11 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-11:hover ~ .sabFlexVBox .sabLiteraInFlex-11 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -336,21 +336,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-11:hover ~ .sabFlexVBox .sabLiteraInFlex-12 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-12:hover ~ .sabFlexVBox .sabLiteraInFlex-12 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -358,21 +358,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-12:hover ~ .sabFlexVBox .sabLiteraInFlex-13 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-13:hover ~ .sabFlexVBox .sabLiteraInFlex-13 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -380,21 +380,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-13:hover ~ .sabFlexVBox .sabLiteraInFlex-14 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-14:hover ~ .sabFlexVBox .sabLiteraInFlex-14 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -402,21 +402,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-14:hover ~ .sabFlexVBox .sabLiteraInFlex-15 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-15:hover ~ .sabFlexVBox .sabLiteraInFlex-15 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -424,21 +424,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-15:hover ~ .sabFlexVBox .sabLiteraInFlex-16 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-16:hover ~ .sabFlexVBox .sabLiteraInFlex-16 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -446,21 +446,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-16:hover ~ .sabFlexVBox .sabLiteraInFlex-17 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-17:hover ~ .sabFlexVBox .sabLiteraInFlex-17 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -468,21 +468,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-17:hover ~ .sabFlexVBox .sabLiteraInFlex-18 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-18:hover ~ .sabFlexVBox .sabLiteraInFlex-18 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -490,21 +490,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-18:hover ~ .sabFlexVBox .sabLiteraInFlex-19 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-19:hover ~ .sabFlexVBox .sabLiteraInFlex-19 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -512,21 +512,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-19:hover ~ .sabFlexVBox .sabLiteraInFlex-20 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-20:hover ~ .sabFlexVBox .sabLiteraInFlex-20 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -534,21 +534,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-20:hover ~ .sabFlexVBox .sabLiteraInFlex-21 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-21:hover ~ .sabFlexVBox .sabLiteraInFlex-21 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -556,21 +556,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-21:hover ~ .sabFlexVBox .sabLiteraInFlex-22 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-22:hover ~ .sabFlexVBox .sabLiteraInFlex-22 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -578,21 +578,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-22:hover ~ .sabFlexVBox .sabLiteraInFlex-23 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-23:hover ~ .sabFlexVBox .sabLiteraInFlex-23 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -600,21 +600,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-23:hover ~ .sabFlexVBox .sabLiteraInFlex-24 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-24:hover ~ .sabFlexVBox .sabLiteraInFlex-24 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -622,21 +622,21 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-24:hover ~ .sabFlexVBox .sabLiteraInFlex-25 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-25:hover ~ .sabFlexVBox .sabLiteraInFlex-25 {
   width: 65px;
   height: 65px;
   font-size: 45px;
-  left: 50px;
+  left: 60px;
   z-index: 2;
 }
 
@@ -644,13 +644,13 @@ body {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 
 .sabMarkBox-25:hover ~ .sabFlexVBox .sabLiteraInFlex-26 {
   width: 50px;
   height: 50px;
   font-size: 35px;
-  left: 40px;
+  left: 50px;
 }
 

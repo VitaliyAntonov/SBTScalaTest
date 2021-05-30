@@ -59,19 +59,19 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
       val LenN = alphabet.size - 1
       for (i <- 0 until alphabet.size) {
         css +=  CCss.cssMarkBoxHover(i) // CSS для hover на разметочных боксах
-        i match {
-          case 0 | LenN => html +=
-            s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}">${alphabet(i)}</div>\n"""
-          case _ => html +=
-            s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsFLiteraHoverName}()" onmouseout="${SClass.jsFLiteraEndHoverName}()">${alphabet(i)}</div>\n"""
-        }
+        html += s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsLiteraHoverN}(${i})" onmouseout="${SClass.jsLiteraEndHoverN}(${i})">${alphabet(i)}</div>\n"""
       }
     }
 
     /** Закрытие контейнера для вертикального FLEX */
     html += s"""    </div>\n"""
 
-    addJs(page, CJS.jsLiteraHoverResizeFlexBox)   // Добавляем сформированный JS
+
+
+
+    addJs(page, CJS.jsLiteraHoverN)
+    addJs(page, CJS.jsLiteraEndHoverN)            // Добавляем сформированный JS
+
     addCss(page, css)                             // Добавляем сформированный CSS
     addHtml(page, html)                           // Добавляем сформированный HTML
   }
@@ -105,13 +105,10 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** контейнеры литер */
     val literaBoxName = s"${name}LiteraInFlex"
-    /** ИМЯ Функции JS - hover на литере */
-    val jsFLiteraHoverName = "hoverResizeFlexBox"
-    /** ИМЯ Функции JS - снятие hover с литеры */
-    val jsFLiteraEndHoverName = "endHoverResizeFlexBox"
-
-    /** при hover на литере изменение размеров верхней литеры */
-
+    /** JS Имя функции при hover на литере - параметр номер литеры */
+    val jsLiteraHoverN = "jsLiteraHoverN"
+    /** JS Имя функции при ОКОНЧАНИИ hover на литере  - параметр номер литеры */
+    val jsLiteraEndHoverN = "jsLiteraEndHoverN"
   }
 
   /** Component Size - размеры компонента и его составляющих */
@@ -129,18 +126,18 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     val heightFlexBoxHoverOnLitera = heightFlexBox - sizeLiteraBox3
 
     /** координата left контейнеров литер */
-    val leftLiteraBox = 30
-    val leftLiteraBoxHover = 40
-    val leftLiteraBoxHover3 = 50
+    val leftLiteraBox = 40
+    val leftLiteraBoxHover = 50
+    val leftLiteraBoxHover3 = 60
 
     /** контейнеры литер имеют по три размера width = height */
-    lazy val sizeLiteraBox0 = 15
+    lazy val sizeLiteraBox0 = 18
     lazy val sizeLiteraBox2 = 50
     lazy val sizeLiteraBox3 = 65
     /** Зазор между контейнерами литер */
-    lazy val gapLiteraBox = 0
+    lazy val gapLiteraBox = 1
     /** размер шрифта литер имеют по четыре размера */
-    lazy val literaFontSize0 = 10
+    lazy val literaFontSize0 = 13
     lazy val literaFontSize2 = 35
     lazy val literaFontSize3 = 45
   }
@@ -256,31 +253,67 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
   /** Component Java Script - JS скрипты компонента */
   object CJS {
-    /** изменение положения и размера flexBox по hover на литере */
-    def jsLiteraHoverResizeFlexBox: String = {
+
+    /** изменение размеров соседних литер при hover на литере
+     * @num - номер текущей литеры */
+    def jsLiteraHoverN: String = {
       val s =
         s"""
-           |function ${SClass.jsFLiteraHoverName}() {
-           |   document.getElementById("${SClass.idFlexVboxName}").style.top = "${CSize.topFlexBoxHoverOnLitera}px";
-           |   document.getElementById("${SClass.idFlexVboxName}").style.height = "${CSize.heightFlexBoxHoverOnLitera}px";
-           |}
+           |function ${SClass.jsLiteraHoverN}(num) {
+           |  let numUp = num - 1;
+           |  let numDown = num + 1;
+           |  let classUpName = "${SClass.literaBoxName + "-"}" + numUp;
+           |  let classDownName = "${SClass.literaBoxName + "-"}" + numDown;
+           |  let classUp = document.getElementsByClassName(classUpName);
+           |  let classDown = document.getElementsByClassName(classDownName);
            |
-           |function ${SClass.jsFLiteraEndHoverName}() {
-           |   document.getElementById("${SClass.idFlexVboxName}").style.top = "${CSize.topFlexBox}px";
-           |   document.getElementById("${SClass.idFlexVboxName}").style.height = "${CSize.heightFlexBox}px";
+           |  if(num > 0){
+           |	  classUp[0].style.width = "${CSize.sizeLiteraBox2}px";
+           |    classUp[0].style.height = "${CSize.sizeLiteraBox2}px";
+           |    classUp[0].style.fontSize = "${CSize.literaFontSize2}px";
+           |    classUp[0].style.left = "${CSize.leftLiteraBoxHover}px";
+           |  }
+           |  if(num < ${alphabet.length - 1}){
+           |	  classDown[0].style.width = "${CSize.sizeLiteraBox2}px";
+           |    classDown[0].style.height = "${CSize.sizeLiteraBox2}px";
+           |    classDown[0].style.fontSize = "${CSize.literaFontSize2}px";
+           |    classDown[0].style.left = "${CSize.leftLiteraBoxHover}px";
+           |  }
            |}
            |""".stripMargin
       s
     }
 
-    /** изменение размеров верхней литеры */
-    def jsLiteraHoverResizeUpLiteraBox: String = {
+    /** изменение размеров соседних литер при ОКОНЧАНИИ hover на литере
+     * @num - номер текущей литеры */
+    def jsLiteraEndHoverN: String = {
       val s =
         s"""
-           |function ${SClass.jsFLiteraHoverName}() {
+           |function ${SClass.jsLiteraEndHoverN}(num) {
+           |  let numUp = num - 1;
+           |  let numDown = num + 1;
+           |  let classUpName = "${SClass.literaBoxName + "-"}" + numUp;
+           |  let classDownName = "${SClass.literaBoxName + "-"}" + numDown;
+           |  let classUp = document.getElementsByClassName(classUpName);
+           |  let classDown = document.getElementsByClassName(classDownName);
+           |
+           |  if(num > 0){
+           |	  classUp[0].style.width = null;
+           |    classUp[0].style.height = null;
+           |    classUp[0].style.fontSize = null;
+           |    classUp[0].style.left = null;
+           |  }
+           |  if(num < ${alphabet.length - 1}){
+           |	  classDown[0].style.width = null;
+           |    classDown[0].style.height = null;
+           |    classDown[0].style.fontSize = null;
+           |    classDown[0].style.left = null;
+           |  }
+           |}
            |""".stripMargin
       s
     }
+
 
   }
 
