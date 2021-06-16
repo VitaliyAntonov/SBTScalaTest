@@ -12,7 +12,7 @@ import siteCreator.HtmlPC
 
 /** Перечень ссылок на компоненты */
 object HtmlCom extends Enumeration {
-  lazy val fixButton = new FixButton("Test")
+
 
   /** Здесь можно изменить тему, передав в RootCss другое имя темы, например colorThemeWhite */
   lazy val actColorTheme = ColorTheme.colorBasicTheme

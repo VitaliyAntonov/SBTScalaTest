@@ -42,14 +42,41 @@ object tagsCSS {
   pro += Array("background-size","auto","length","percentage","cover","contain","initial","inherit")
   pro += Array("border","border-width","border-style","border-color","initial","inherit")
   pro += Array("border-bottom","lait_TODO")// TODO Делать
-  pro += Array("border-bottom-color","color","transparent","initial","inherit")
+  pro += Array("border-bottom-color","color","transparent","initial","inherit")// TODO делать color
+  pro += Array("border-bottom-left-radius", "PX_radius_TODO")
+  pro += Array("border-bottom-right-radius", "PX_radius_TODO")
+  pro += Array("border-bottom-style","none","hidden","dotted","dashed","solid","double","groove","ridge",
+                      "inset","outset","initial","inherit")
+  pro += Array("border-bottom-width","PX_width_TODO")
+  pro += Array("border-collapse","separate","collapse","initial","inherit")
+  pro += Array("border-color","color_TODO") // TODO делать color
+  pro += Array("border-image","url_TODO") // TODO делать
+  pro += Array("border-image-outset","PX_TODO") // TODO Делать
+  pro += Array("border-image-repeat","stretch","repeat","round","space","initial","inherit")
+  pro += Array("border-image-slice","number_TODO","%_TODO","fill_TODO","initial","inherit") // TODO Делать
+  pro += Array("border-image-source","url_TODO")  // TODO Делать
+  pro += Array("border-image-width","length_TODO","number_TODO","%_TODO","auto","initial","inherit") // TODO Делать
+  pro += Array("border-left", "border_TODO") // TODO Делать
+  pro += Array("border-left-color","color_TODO") // TODO делать color
+  pro += Array("border-left-style","none","hidden","dotted","dashed","solid","double","groove","ridge",
+                      "inset","outset","initial","inherit")
+  pro += Array("border-left-width","medium","thin","thick","length_TODO","initial","inherit")// TODO Делать
+  pro += Array("border-radius","length_TODO","%_TODO","initial","inherit")// TODO Делать
+  pro += Array("border-right","border_TODO","initial","inherit")// TODO Делать
+  pro += Array("border-right-color","color_TODO","transparent","initial","inherit") // TODO делать color
+  pro += Array("border-right-style","none","hidden","dotted","dashed","solid","double","groove","ridge",
+                      "inset","outset","initial","inherit")
+  pro += Array("border-right-width","medium","thin","thick","length_TODO","initial","inherit")// TODO Делать
 //  pro += Array()
 //  pro += Array()
 //  pro += Array()
 //  pro += Array()
-
-
-
+//  pro += Array()
+//  pro += Array()
+//  pro += Array()
+//  pro += Array()
+//  pro += Array()
+//  pro += Array()
 }
 
 

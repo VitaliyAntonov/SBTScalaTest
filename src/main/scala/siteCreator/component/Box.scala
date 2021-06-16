@@ -7,7 +7,7 @@ package siteCreator.component
 
 
 /**
- * Класс для создания контейнеров html
+ * Класс для создания контейнеров(div) html
  * @param sName  - Имя для селектора класса CSS кода
  * @param width
  * @param height
@@ -27,5 +27,19 @@ class Box(val sName: String, var width: Int, var height: Int, var top: Int = 0, 
 
   /** HTML Закрытие контейнера */
   def htmlCloseBox: String = s"""</div>"""
+
+  /** CSS контейнера с размерами */
+  def cssBox: String = {
+    lazy val s =
+      s"""
+        |div.${sName} {
+        |   width: ${width}px;
+        |   height: ${height}px;
+        |   top: ${top}px;
+        |   left: ${left}px;
+        |}
+        |""".stripMargin
+    s
+  }
 
 }

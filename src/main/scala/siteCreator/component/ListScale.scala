@@ -138,7 +138,7 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     lazy val sizeLiteraBox3 = 65
     /** Зазор между контейнерами литер */
     lazy val gapLiteraBox = 1
-    /** размер шрифта литер имеют по четыре размера */
+    /** размер шрифта литер имеют по три размера */
     lazy val literaFontSize0 = 13
     lazy val literaFontSize2 = 35
     lazy val literaFontSize3 = 45
@@ -153,7 +153,7 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
            |.${SClass.markBoxName} {
            |  position: absolute;
            |  width: ${CSize.widthMarkBox}px;
-           |  border: 1px solid #808080;
+           |  border: 1px dotted #808080;
            |  z-index: 1;
            |}
            |""".stripMargin

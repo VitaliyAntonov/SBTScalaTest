@@ -179,7 +179,7 @@ object CSSLibGenerate {
 
   /** Генерация шаблона классов свойств CSS */
   def generatePropertyClass = {
-    for(i <- 0 until tagsCSS.pro.length){
+    for(i <- tagsCSS.pro.indices){
       /** имя свойства CSS для названия класса */
       nameProperty = tagsCSS.pro(i)(0)
       scalaNameProperty = nameToScala(nameProperty)

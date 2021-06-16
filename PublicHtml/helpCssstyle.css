@@ -18,7 +18,7 @@ body {
 .sabMarkBox {
   position: absolute;
   width: 200px;
-  border: 1px solid #808080;
+  border: 1px dotted #808080;
   z-index: 1;
 }
 .sabMarkBox-0 {top: 60px; height: 65px;}

@@ -85,6 +85,36 @@ class SelectPanels(name: String)(panels: String*) extends Component(name + "STab
     lazy val tabBox: String = s"""${name}TabBox"""
   }
 
+  /** Component Size - размеры компонента и его составляющих */
+  object CSize {
+    /** ширина кнопки вкладок */
+    lazy val butWidth = 100
+    /** высота кнопки вкладок */
+    lazy val butHeight = 25
+    /** отступ от верха панели для кнопок */
+    lazy val butTop = 15
+    /** отступ блока кнопок слева */
+    lazy val butBlockLeft = 15
+    /** Расстояние между кнопками */
+    lazy val butGapW = 20
+    /** Бордюр кнопки неактивной вкладки */
+    lazy val borderBut = s"1px solid ${CColors.butColor}"
+    lazy val borderRadius = 4
+
+    /** увеличение размеров в пикселях при Check */
+    lazy val butAddSize = butGapW
+    lazy val butWidthCheck = butWidth + butAddSize
+    lazy val butHeightCheck = butHeight + butAddSize
+    /** сдвиг координат top и left при Check */
+    lazy val butCheckTranslate = -(butAddSize/2)
+
+    /** контейнеры вкладок панелей */
+    lazy val topTabPanel = butTop + butHeight + butAddSize/2 - 1 // -1 пиксель для бордюра
+    lazy val leftTabPanel = 3
+    lazy val widthTabPanel = "calc(100vw - 6px)"
+    lazy val heightTabPanel = s"calc(100vh - ${topTabPanel + leftTabPanel}px)"
+  }
+
   /** Component CSS - CSS код, используемый для формирования компонента на странице */
   object CCss {
     /** CSS контейнера для всех элементов */
@@ -210,36 +240,6 @@ class SelectPanels(name: String)(panels: String*) extends Component(name + "STab
            |""".stripMargin
       s
     }
-  }
-
-  /** Component Size - размеры компонента и его составляющих */
-  object CSize {
-    /** ширина кнопки вкладок */
-    lazy val butWidth = 100
-    /** высота кнопки вкладок */
-    lazy val butHeight = 25
-    /** отступ от верха панели для кнопок */
-    lazy val butTop = 15
-    /** отступ блока кнопок слева */
-    lazy val butBlockLeft = 15
-    /** Расстояние между кнопками */
-    lazy val butGapW = 20
-    /** Бордюр кнопки неактивной вкладки */
-    lazy val borderBut = s"1px solid ${CColors.butColor}"
-    lazy val borderRadius = 4
-
-    /** увеличение размеров в пикселях при Check */
-    lazy val butAddSize = butGapW
-    lazy val butWidthCheck = butWidth + butAddSize
-    lazy val butHeightCheck = butHeight + butAddSize
-    /** сдвиг координат top и left при Check */
-    lazy val butCheckTranslate = -(butAddSize/2)
-
-    /** контейнеры вкладок панелей */
-    lazy val topTabPanel = butTop + butHeight + butAddSize/2 - 1 // -1 пиксель для бордюра
-    lazy val leftTabPanel = 3
-    lazy val widthTabPanel = "calc(100vw - 6px)"
-    lazy val heightTabPanel = s"calc(100vh - ${topTabPanel + leftTabPanel}px)"
   }
 
   /** Component Colors - цвета компонента и его составляющих */

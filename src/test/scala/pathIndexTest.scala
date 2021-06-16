@@ -5,8 +5,8 @@ import CSSv01.Tags.mapTester
 import CSSv1.SortCats.ImplicitCodeTest
 import CSSv1.Tester.selectTest
 import CSSv1.{ChainTest, myCSSOrderTest}
+import dataBaseStructure.dataBaseTest
 import siteCreator.component.{testerAnimTag, testerColorTheme}
-
 import siteCreator.testPC
 import siteCreatorV0.TagTest
 
@@ -63,3 +63,5 @@ object RuntesterAnimTag extends App{ testerAnimTag }
 
 object RuntesterColorTheme extends App{ testerColorTheme }
 
+
+object RundataBaseTest extends App{ dataBaseTest }

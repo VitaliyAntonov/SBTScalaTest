@@ -1,6 +1,6 @@
 package siteCreator
 
-import siteCreator.component.{Component, HtmlCom}
+import siteCreator.component.{Component, HtmlCom, TreeDom}
 
 import java.io.PrintWriter
 
@@ -22,7 +22,7 @@ class CssFile(val fileName: String) {var css: String = ""}
 class JsFile(val fileName: String) {var js: String = ""}
 
 /**
- * Класс для создания 3-х файлов: CSS, JS и HTML одной страницы. (HtmlPageCreator)
+ * Класс для создания 3-х файлов: CSS, JS и HTML одной страницы и DOM модели. (HtmlPageCreator)
  * @param namePage - имя страницы
  */
 class HtmlPC(val namePage: String){
@@ -33,6 +33,15 @@ class HtmlPC(val namePage: String){
 
   val jsFileName = namePage + "script"
   val jsFile = new JsFile(jsFileName)
+
+  /** Массив для хранения модели DOM HTML страницы
+   * 1 - уровень вложенности
+   * 2 - ID при наличии
+   * 3 - массив имён селекторов класса */
+//  val domPage = new ArrayBuffer[(Int, String, ArrayBuffer[String])]
+  val domPage = new TreeDom
+
+//  domPage.dom += Tuple3(0, "ID", ("className1", "className2"))
 
   /**
    * Добавление компонента в буфер
