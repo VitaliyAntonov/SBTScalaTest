@@ -1,5 +1,8 @@
 package siteCreator.component
 
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
+
 /**
  * @author Виталий Антонов @date 5/27/21
  *         kaligraf@yandex.ru
@@ -16,6 +19,54 @@ package siteCreator.component
  */
 class Box(val sName: String, var width: Int, var height: Int, var top: Int = 0, var left: Int = 0) {
 
+  /** Список значений css свойств компонента
+   * _1  Свойство
+   * _2  Значение
+   * */
+  val cssList = new mutable.ListBuffer[(String, String)]()
+
+  cssList += (
+    ("width", s"${width.toString}px"),
+    ("height", s"${height.toString}px"),
+    ("left", s"${left.toString}px"),
+    ("top", s"${top.toString}px")
+  )
+
+  val cssListHover = new ListBuffer[(String, String)]()
+
+  /** CSS код компонента */
+  def CSS: String = {
+    var s=""
+    s += s".${sName} {\n"
+    for(arg <- cssList){
+      s += arg._1 + ": " + arg._2 + ";\n"
+    }
+    s += "}\n"
+    s
+  }
+
+  /** CSS код при hover компонента */
+  def CSSHover: String = {
+    var s=""
+    s += s".${sName}:hover {\n"
+    for(arg <- cssListHover){
+      s += arg._1 + ": " + arg._2 + ";\n"
+    }
+    s += "}\n"
+    s
+  }
+
+  /** CSS код при hover компонента для добавления контекста */
+  def CSSHoverContent(content: String): String = {
+    val s =
+      s"""
+         |.${sName}:hover span::after {
+         |  content: "${content}";
+         |}
+         |""".stripMargin
+    s
+  }
+
   /** Имя селектора класса с номером */
   def sNameN(num: Int): String = sName + "-" + num.toString
 
@@ -28,18 +79,5 @@ class Box(val sName: String, var width: Int, var height: Int, var top: Int = 0, 
   /** HTML Закрытие контейнера */
   def htmlCloseBox: String = s"""</div>"""
 
-  /** CSS контейнера с размерами */
-  def cssBox: String = {
-    lazy val s =
-      s"""
-        |div.${sName} {
-        |   width: ${width}px;
-        |   height: ${height}px;
-        |   top: ${top}px;
-        |   left: ${left}px;
-        |}
-        |""".stripMargin
-    s
-  }
 
 }

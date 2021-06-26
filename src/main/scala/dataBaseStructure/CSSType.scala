@@ -176,7 +176,7 @@ object CSSType extends Enumeration{
 
   /** centimeters; millimeters; inches(1in = 96px = 2.54cm); *	pixels (1px = 1/96th of 1in);
    *  points(1pt = 1/72 of 1in); picas(1pc = 12 pt) */
-  val length =   // TODO
+  val CSSType_length =   // TODO
     s"""
        |cm
        |mm
@@ -235,6 +235,13 @@ object CSSType extends Enumeration{
   val CSSType_basic_shape = "CSSType_basic_shape" // TODO
 
   val CSSType_column_count_number = "CSSType_column_count_number" // TODO
+
+  val CSSType_column =
+    s"""
+       |CSSType_column_width CSSType_Int CSSType_sizeUnit_px
+       |CSSType_column_count CSSType_Int
+       |""".stripMargin
+
 
 
 

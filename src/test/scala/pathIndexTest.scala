@@ -65,3 +65,6 @@ object RuntesterColorTheme extends App{ testerColorTheme }
 
 
 object RundataBaseTest extends App{ dataBaseTest }
+
+object RunFutureTest extends App{ FutureTest }
+

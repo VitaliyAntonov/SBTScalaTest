@@ -86,14 +86,14 @@ object CSSBaseData{
        |column-count CSSType_column_count_number auto initial inherit
        |column-fill balance auto initial inherit
        |column-gap CSSType_length normal initial inherit
-       |column-rule
-       |column-rule-color
-       |column-rule-style
-       |column-rule-width
-       |column-span
-       |column-width
-       |columns
-       |content
+       |column-rule column-rule-width column-rule-style column-rule-color initial inherit
+       |column-rule-color CSSType_color initial inherit
+       |column-rule-style none hidden dotted dashed solid double groove ridge inset outset initial inherit
+       |column-rule-width medium thin thick CSSType_length initial inherit
+       |column-span none all initial inherit
+       |column-width auto CSSType_length initial inherit
+       |columns auto CSSType_column_width CSSType_column_count initial inherit
+       |content normal none CSSType_counter CSSType_attr CSSType_string open-quote close-quote no-open-quote no-close-quote CSSType_url initial inherit
        |counter-increment
        |counter-reset
        |cursor

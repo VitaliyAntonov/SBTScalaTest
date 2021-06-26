@@ -17,15 +17,19 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
   extends Component(name + "ListScale") {
 
   override def html(page: HtmlPC): Unit = {
-
     /** html текущей страницы */
-    var html: String = ""
+    val htmlCod = new HtmlC // объект HTML кода компонента
     /** CSS текущей страницы */
     var css: String = ""
     /** JS текущей страницы */
     var js: String = ""
 
-    css +=  CCss.cssMarkBoxes
+    css +=  CCss.cssMarkBoxes + CCss.cssMarkBoxesHover + CElem.markBox.CSSHoverContent(">>>>>")
+
+
+    /** html контейнер области видимости */
+    htmlCod + CElem.visibleBox.htmlOpenBoxWithSClass + enter
+
 
     /** html контейнеры вертикальной разметки */
     if(alphabet.nonEmpty){
@@ -45,26 +49,32 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
         css +=  CCss.cssMarkBoxN(i) + enter
 
         // HTML для использования JS
-        html += s"""    <div class="${CElem.markBox.sName} ${CElem.markBox.sNameN(i)}" onmouseover="${SClass.jsFnMarkBoxHoverN}(${i})" onmouseout="${SClass.jsFnMarkBoxEndHoverN}(${i})">${i}</div>""" + enter
+        htmlCod + s"""    <div class="${CElem.markBox.sName} ${CElem.markBox.sNameN(i)}" onmouseover="${SClass.jsFnMarkBoxHoverN}(${i})" onmouseout="${SClass.jsFnMarkBoxEndHoverN}(${i})"><span></span></div>""" + enter
+
       }
     }
 
     /** Открываем контейнер для вертикального FLEX */
-    html += s"""    <div id="${SClass.idFlexVboxName}" class="${SClass.flexVboxName}">\n"""
+    htmlCod + s"""    <div id="${SClass.idFlexVboxName}" class="${SClass.flexVboxName}">\n"""
 
+    css +=  CCss.cssScrollbar
     css +=  CCss.cssVFlexBox
     css +=  CCss.cssLiteraBoxes
     css +=  CCss.cssLiteraBoxHover
+    css +=  CCss.cssVisibleBox
 
     /** Контейнеры литер */
     if(alphabet.nonEmpty) {
       for (i <- 0 until alphabet.length) {
-        html += s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsFnLiteraHoverN}(${i})" onmouseout="${SClass.jsFnLiteraEndHoverN}(${i})">${alphabet(i)}</div>\n"""
+        htmlCod + s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsFnLiteraHoverN}(${i})" onmouseout="${SClass.jsFnLiteraEndHoverN}(${i})">${alphabet(i)}</div>\n"""
       }
     }
 
     /** Закрытие контейнера для вертикального FLEX */
-    html += s"""    </div>\n"""
+    htmlCod + s"""    </div>\n"""
+
+    /** Закрытие контейнера области видимости */
+    htmlCod + CElem.visibleBox.htmlCloseBox + enter
 
     /**  Добавляем JS */
     js += CJS.jsMarkBoxHover + CJS.jsLiteraHoverN + CJS.jsLiteraEndHoverN
@@ -72,17 +82,18 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     /** Добавляем сформированный CSS */
     addCss(page, css)
     /** Добавляем сформированный HTML */
-    addHtml(page, html)
+    addHtml(page, htmlCod.buffer)
+
   }
 
-  /** Встроенные элементы Component Elements */
+  /** Встроенные элементы компонента Component Elements */
   object CElem{
-    /** контейнер области видимости - в нём помещается больший контейнер mapBox */
-    val visibleBox = new Box(s"${name}VisibleBox", 400, 600, 50, 0)
+    /** контейнер области видимости списка */
+    val visibleBox = new Box(s"${name}VisibleBox", CSize.visibleBoxWidth, 400, 50, 0)
     /** контейнер mapBox - отображает базу данных */
     val mapBox = new Box(s"${name}MapBox", 1000, 1000, -70, 0)
     /** контейнер разметки */
-    lazy val markBox = new Box(s"${name}MarkBox", CSize.widthMarkBox, CSize.heightMarkBox, CSize.topMarkBoxes, 0)
+    val markBox = new Box(s"${name}MarkBox", CSize.widthMarkBox, CSize.heightMarkBox, CSize.topMarkBoxes, 0)
     /** контейнер flexBox */
     val flexBox = new Box(s"${name}FlexVBox", CSize.widthFlexBox, CSize.heightFlexBox,
                               CSize.topFlexBox, 0 )
@@ -116,9 +127,9 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
   /** Component Size - размеры компонента и его составляющих */
   object CSize {
     /** контейнеры разметки */
-    val widthMarkBox = 200
+    val widthMarkBox = 100
     val heightMarkBox = sizeLiteraBox0 + gapLiteraBox
-    val topMarkBoxes = 60
+    val topMarkBoxes = 0
 
     /** вертикальный FLEX контейнер */
     val widthFlexBox = 100
@@ -142,10 +153,45 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     lazy val literaFontSize0 = 13
     lazy val literaFontSize2 = 35
     lazy val literaFontSize3 = 45
+
+    /** Ширина visibleBox */
+    lazy val visibleBoxWidth = leftLiteraBoxHover3 + sizeLiteraBox3 + 1
+
   }
 
   /** Component CSS - CSS код, используемый для формирования компонента на странице */
   object CCss {
+    /** Настройки полосы прокрутки */
+    def cssScrollbar: String = {
+      s"""
+         |::-webkit-scrollbar {
+         |    width: 0px;
+         |    height: 0px;
+         |}
+         |::-webkit-scrollbar-track {
+         |    background-color: #43626d;
+         |    box-shadow: inset 0 0 3px #ffffff;
+         |    border-radius: 10px;
+         |}
+         |::-webkit-scrollbar-thumb {
+         |    border-radius: 10px;
+         |    box-shadow: inset 0 0 3px #ffffff;
+         |    background-color: #384952;
+         |}
+         |""".stripMargin
+    }
+
+
+    /** CSS контейнера области видимости списка */
+    def cssVisibleBox: String = {
+      CElem.visibleBox.cssList += (
+        ("position", "relative"),
+        ("overflow-y", "scroll"),
+        ("background-color", "#182922" )
+      )
+      CElem.visibleBox.CSS
+    }
+
     /** общий CSS для контейнеров вертикальной разметки - z-index 1 размещает разметку ВЫШЕ флекс бокса */
     def cssMarkBoxes: String = {
       lazy val s =
@@ -154,6 +200,8 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
            |  position: absolute;
            |  width: ${CSize.widthMarkBox}px;
            |  border: 1px dotted #808080;
+           |  display: flex;
+           |  align-items: center;
            |  z-index: 1;
            |}
            |""".stripMargin
@@ -161,20 +209,30 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     }
     /** CSS координата top контейнеров вертикальной разметки */
     def cssMarkBoxN(num: Int): String = {
-      lazy val s =
+      val s =
       s""".${CElem.markBox.sNameN(num)} {top: ${CElem.markBox.top}px; height: ${CElem.markBox.height}px;}"""
       s
     }
 
+    /** CSS hover на контейнере вертикальной разметки */
+    def cssMarkBoxesHover: String = {
+      CElem.markBox.cssListHover += (
+        ("background-color", "#283942")
+      )
+      CElem.markBox.CSSHover
+    }
+
+
     /** CSS для контейнера с вертикальным FLEX */
     def cssVFlexBox: String = {
-      lazy val s =
+      val s =
         s"""
            |.${SClass.flexVboxName} {
            |  display: flex;
            |  flex-direction: column;
            |  justify-content: space-around;
            |  position: absolute;
+           |  overflow: visible;
            |  left: 0px;
            |  top: ${CElem.flexBox.top}px;
            |  width: ${CSize.widthFlexBox}px;
@@ -188,7 +246,7 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** общий CSS для контейнеров литер */
     def cssLiteraBoxes: String = {
-      lazy val s =
+      val s =
         s"""
            |.${SClass.literaBoxName} {
            |  position: relative;
@@ -208,7 +266,7 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** CSS для hover на контейнере Литеры */
     def cssLiteraBoxHover: String = {
-      lazy val s =
+      val s =
         s"""
            |.${SClass.literaBoxName}:hover {
            |  background-color: #384952;
@@ -218,6 +276,8 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     }
 
 
+
+
   }
 
   /** Component Java Script - JS скрипты компонента */
@@ -225,20 +285,36 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** Изменение размеров при hover на контейнере разметки */
     def jsMarkBoxHover: String = {
-      val s =
-        s"""
+
+      /** Функция вызывается при hover на контейнере разметки
+       * - увеличивает до 3-го размера привязанную к разметке литеру
+       * - увеличивает до 2-го размера соседние литеры
+       * */
+      var s = s"""
            |function ${SClass.jsFnMarkBoxHoverN}(num) {
            |  class3SetStyle(getClass(num));
            |  let iUpDown = classUpDown(num);
            |  if(num > 0) class2SetStyle(iUpDown.classUp);
            |  if(num < ${alphabet.length - 1}) class2SetStyle(iUpDown.classDown);
            |}
+           |""".stripMargin
+
+      /** Функция вызывается при окончании hover на контейнере разметки
+       * - сбрасывает стили привязанной к разметке литеры
+       * - сбрасывает стили соседних литер
+       * */
+      s += s"""
            |function ${SClass.jsFnMarkBoxEndHoverN}(num) {
            |  classResetStyle(getClass(num));
            |  let iUpDown = classUpDown(num);
            |  if(num > 0) classResetStyle(iUpDown.classUp);
            |  if(num < ${alphabet.length - 1}) classResetStyle(iUpDown.classDown);
            |}
+           |""".stripMargin
+
+      /** Функция возвращает два идентификатора для верхней и нижней литер
+       * по именам классов литер */
+      s += s"""
            |function classUpDown(num) {
            |  let classUpName = "${SClass.literaBoxName + "-"}" + (num - 1);
            |  let classDownName = "${SClass.literaBoxName + "-"}" + (num + 1);
@@ -249,11 +325,21 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
            |    classDown: iClDown[0],
            |  };
            |}
+           |""".stripMargin
+
+      /** Функция возвращает идентификатор для литеры привязанной к разметке
+       * по имени класса литеры */
+      s += s"""
            |function getClass(num) {
            |  let className = "${SClass.literaBoxName + "-"}" + num;
            |  let iClass = document.getElementsByClassName(className);
            |  return iClass[0];
            |}
+           |""".stripMargin
+
+      /** Функция выставляет стили 3-го размера для компонента
+       * с идентификатором iclName */
+      s += s"""
            |function class3SetStyle(iclName) {
            |	  iclName.style.width = "${CSize.sizeLiteraBox3}px";
            |    iclName.style.height = "${CSize.sizeLiteraBox3}px";
@@ -261,12 +347,22 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
            |    iclName.style.left = "${CSize.leftLiteraBoxHover3}px";
            |    iclName.style.zIndex = 2;
            |}
+           |""".stripMargin
+
+      /** Функция выставляет стили 2-го размера для компонента
+       * с идентификатором iclName */
+      s += s"""
            |function class2SetStyle(iclName) {
            |	  iclName.style.width = "${CSize.sizeLiteraBox2}px";
            |    iclName.style.height = "${CSize.sizeLiteraBox2}px";
            |    iclName.style.fontSize = "${CSize.literaFontSize2}px";
            |    iclName.style.left = "${CSize.leftLiteraBoxHover}px";
            |}
+           |""".stripMargin
+
+      /** Функция сбрасывает стили для компонента
+       * с идентификатором iclName */
+      s += s"""
            |function classResetStyle(iclName) {
            |	  iclName.style.width = null;
            |    iclName.style.height = null;
