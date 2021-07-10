@@ -18,17 +18,17 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
   override def html(page: HtmlPC): Unit = {
     /** html текущей страницы */
-    val htmlCod = new HtmlC // объект HTML кода компонента
+    val htmlCod = new HtmlC // объект HTML код компонента
     /** CSS текущей страницы */
     var css: String = ""
     /** JS текущей страницы */
     var js: String = ""
 
-    css +=  CCss.cssMarkBoxes + CCss.cssMarkBoxesHover + CElem.markBox.CSSHoverContent(">>>>>")
+    css +=  CCss.cssMarkBoxes + CCss.cssMarkBoxesHover  + CElem.markBox.cssHoverContent("=>>>>>")
 
 
     /** html контейнер области видимости */
-    htmlCod + CElem.visibleBox.htmlOpenBoxWithSClass + enter
+    htmlCod ++ CElem.visibleBox.htmlOpenBoxWithSClass ++ enter
 
 
     /** html контейнеры вертикальной разметки */
@@ -49,13 +49,13 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
         css +=  CCss.cssMarkBoxN(i) + enter
 
         // HTML для использования JS
-        htmlCod + s"""    <div class="${CElem.markBox.sName} ${CElem.markBox.sNameN(i)}" onmouseover="${SClass.jsFnMarkBoxHoverN}(${i})" onmouseout="${SClass.jsFnMarkBoxEndHoverN}(${i})"><span></span></div>""" + enter
+        htmlCod ++ s"""    <div class="${CElem.markBox.sName} ${CElem.markBox.sNameN(i)}" onmouseover="${SClass.jsFnMarkBoxHoverN}(${i})" onmouseout="${SClass.jsFnMarkBoxEndHoverN}(${i})"><span></span></div>""" ++ enter
 
       }
     }
 
     /** Открываем контейнер для вертикального FLEX */
-    htmlCod + s"""    <div id="${SClass.idFlexVboxName}" class="${SClass.flexVboxName}">\n"""
+    htmlCod ++ s"""    <div id="${SClass.idFlexVboxName}" class="${SClass.flexVboxName}">\n"""
 
     css +=  CCss.cssScrollbar
     css +=  CCss.cssVFlexBox
@@ -66,15 +66,15 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
     /** Контейнеры литер */
     if(alphabet.nonEmpty) {
       for (i <- 0 until alphabet.length) {
-        htmlCod + s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsFnLiteraHoverN}(${i})" onmouseout="${SClass.jsFnLiteraEndHoverN}(${i})">${alphabet(i)}</div>\n"""
+        htmlCod ++ s"""      <div class="${CElem.literaBox.sName} ${CElem.literaBox.sNameN(i)}" onmouseover="${SClass.jsFnLiteraHoverN}(${i})" onmouseout="${SClass.jsFnLiteraEndHoverN}(${i})">${alphabet(i)}</div>\n"""
       }
     }
 
     /** Закрытие контейнера для вертикального FLEX */
-    htmlCod + s"""    </div>\n"""
+    htmlCod ++ s"""    </div>\n"""
 
     /** Закрытие контейнера области видимости */
-    htmlCod + CElem.visibleBox.htmlCloseBox + enter
+    htmlCod ++ CElem.visibleBox.htmlCloseBox ++ enter
 
     /**  Добавляем JS */
     js += CJS.jsMarkBoxHover + CJS.jsLiteraHoverN + CJS.jsLiteraEndHoverN
@@ -90,6 +90,7 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
   object CElem{
     /** контейнер области видимости списка */
     val visibleBox = new Box(s"${name}VisibleBox", CSize.visibleBoxWidth, 400, 50, 0)
+
     /** контейнер mapBox - отображает базу данных */
     val mapBox = new Box(s"${name}MapBox", 1000, 1000, -70, 0)
     /** контейнер разметки */
@@ -184,10 +185,10 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** CSS контейнера области видимости списка */
     def cssVisibleBox: String = {
-      CElem.visibleBox.cssList += (
-        ("position", "relative"),
-        ("overflow-y", "scroll"),
-        ("background-color", "#182922" )
+      CElem.visibleBox.cssMapList += (
+        "position" -> "relative",
+        "overflow-y" -> "scroll",
+        "background-color" -> "#182922",
       )
       CElem.visibleBox.CSS
     }
@@ -216,10 +217,10 @@ class ListScale(name: String)(tags: String*)(alphabet: String = "")
 
     /** CSS hover на контейнере вертикальной разметки */
     def cssMarkBoxesHover: String = {
-      CElem.markBox.cssListHover += (
-        ("background-color", "#283942")
+      CElem.markBox.cssMapListHover += (
+        "background-color" -> "#283942"
       )
-      CElem.markBox.CSSHover
+      CElem.markBox.cssHover
     }
 
 

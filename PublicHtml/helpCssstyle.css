@@ -24,11 +24,11 @@ body {
   z-index: 1;
 }
 .sabMarkBox:hover {
-background-color: #283942;
+  background-color: #283942;
 }
 
 .sabMarkBox:hover span::after {
-  content: ">>>>>";
+  content: "=>>>>>";
 }
 .sabMarkBox-0 {top: 0px; height: 65px;}
 .sabMarkBox-1 {top: 65px; height: 19px;}
@@ -103,12 +103,12 @@ background-color: #283942;
   background-color: #384952;
 }
 .sabVisibleBox {
-width: 126px;
-height: 400px;
-left: 0px;
-top: 50px;
-position: relative;
-overflow-y: scroll;
-background-color: #182922;
+  background-color: #182922;
+  position: relative;
+  top: 50px;
+  height: 400px;
+  left: 0px;
+  width: 126px;
+  overflow-y: scroll;
 }
 
