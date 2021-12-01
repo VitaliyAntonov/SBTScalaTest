@@ -198,6 +198,9 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
     }
   }
 
+
+
+
   /**
    * Функция слияния двух рисунков
    * накладывает рисунки тайлов, оказавшиеся на границе карт
