@@ -108,6 +108,7 @@ class FolderIndex(val inClassPath: String) {
           objetsCount += 1
           val nameScan = i.getName
 //          println("Папка: " + newPathUp.mkString("/") + "/" + nameScan)
+          /** Рекурсивный вызов */
           scanFolder(newPathUp, nameScan)
         }
 
