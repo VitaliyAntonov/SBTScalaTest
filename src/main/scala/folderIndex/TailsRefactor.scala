@@ -183,7 +183,7 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
 
 
   /**
-   *
+   * Печать в лог шкалы прогресса преобразования тайлов
    * @param count
    * @return
    */
@@ -301,10 +301,10 @@ object refactorTailsTest extends App {
   /** Проверка рефакторинга пирамиды тайлов */
 
   /** Путь к исходной пирамиде тайлов */
-  val sourcePyramidFolder = "/home/vitaliy/develop/project/scala_student/SBTScalaTest/src/test/scala/pack_tails/sourceTail"
+  val sourcePyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/sourceTail/"
 
   /** Путь к результату -  пирамиде тайлов */
-  val resultPyramidFolder = "/home/vitaliy/develop/project/scala_student/SBTScalaTest/src/test/scala/pack_tails/resultTails"
+  val resultPyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/resultTails/"
 
   /** производим рефакторинг пирамиды тайлов */
   val refactor = new TailsRefactor(sourcePyramidFolder, resultPyramidFolder)
