@@ -65,13 +65,20 @@ object StringOptionsHelp extends App {
    * если строка заканчивается указанным суффиксом;
    * в противном случае - false.
    */
-  println("7. Boolean endsWith(String suffix)")
+  println("7. Boolean endsWith(String suffix) - соответствие окончания строки")
   println("Ayushi".endsWith("shi"))
   println("Ayushi".endsWith("sha"))
+  // проверка расширения в имени файла
+  val fName = "0000000161_0000000328.PNG"
+  println(fName.toLowerCase.endsWith(".png"))
+  // обрезка расширения в имени файла
+  val fNameNoExt = fName.slice(0, fName.toLowerCase.lastIndexOfSlice(".png"))
+  println(fNameNoExt)
   println("")
 
 
-  println("qwe.asdf.png".lastIndexOfSlice("png"))
+
+  println("qwe.asdf.png".lastIndexOfSlice(".png"))
   println("qwe.asdf.png".lastIndexOfSlice("asd"))
   println("qwe.asdf.png".lastIndexOfSlice("frt"))
 
