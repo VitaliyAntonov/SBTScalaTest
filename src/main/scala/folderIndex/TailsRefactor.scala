@@ -28,6 +28,9 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
   /** сканируем папки исходных пирамид тайлов */
   val scanPyramids = new FolderIndex(sourcePathName)
 
+  /** Отладка - вывод в лог всех файлов с путями */
+//  scanPyramids.fileNameRoadToLog
+
   /** формируем список дублированных имён файлов из массива */
   val doubleNames: Set[String] = {
     val retSet = mutable.Set[String]()
@@ -101,6 +104,7 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
 
   /**
    * Функция копирования файлов
+   * путь к месту копирования уже должен существовать
    * @param source - путь к исходному файлу
    * @param dest   - путь к новому месту файла
    * @return
@@ -170,10 +174,6 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
       }
 
       /** Выводим лог */
-//      println("imageSourcePath = ")
-//      println(imageSourcePath)
-//      println("resultImagePath = ")
-//      println(resultImagePath)
       fileCount = logProgress(fileCount)
 
     }
@@ -184,8 +184,10 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
 
   /**
    * Печать в лог шкалы прогресса преобразования тайлов
-   * @param count
-   * @return
+   * печатаем в строку 100 точек, затем обнуляем счётчик точек
+   * и переходим на новую строку
+   * @param count  - счётчик
+   * @return       - изменённый счётчик
    */
   def logProgress(count: Int): Int = {
     if(count >= 99){
@@ -301,10 +303,10 @@ object refactorTailsTest extends App {
   /** Проверка рефакторинга пирамиды тайлов */
 
   /** Путь к исходной пирамиде тайлов */
-  val sourcePyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/sourceTail/"
+  val sourcePyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/sourceTails_NO_38_39/"
 
   /** Путь к результату -  пирамиде тайлов */
-  val resultPyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/resultTails/"
+  val resultPyramidFolder = "/home/vitaliy/develop/GDAL_Panorama/Maps/resultTails_NO_38_39/"
 
   /** производим рефакторинг пирамиды тайлов */
   val refactor = new TailsRefactor(sourcePyramidFolder, resultPyramidFolder)

@@ -35,6 +35,17 @@ class FolderIndex(val inClassPath: String) {
   scanFolder(Array[String](), "")
 
 
+  /** Отладка - вывод в лог списка файлов и путей к ним */
+  def fileNameRoadToLog = {
+    for ((fName, road) <- fileNameRoad){
+      print(fName + " -> ")
+      print(road.mkString("/"))
+      println("")
+    }
+  }
+
+
+
   /**
    * Функция сканирует папку с путём,
    * сложенным из пути папки верхнего уровня и имени вложенной папки
@@ -136,6 +147,9 @@ case class nameFileRoad(fileName: String, road: Array[String])
 
 object iFolderIndexTest extends App {
   val fIndex = new FolderIndex("/home/vitaliy/develop/project/scala_student/SBTScalaTest/src/test/scala/pack_tails")
+
+  fIndex.fileNameRoadToLog
+
 
   println("breakPoint")
 

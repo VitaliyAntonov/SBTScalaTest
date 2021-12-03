@@ -44,7 +44,7 @@ import scala.collection.mutable
 
 object CollectionDetail{}
 
-object mapTest{
+object mapTest extends App{
   val y: Map[Int, Char] = Map(1 ->'a', 2->'b', 3->'c', 4->'d')
   val x: mutable.Map[Int, Char] = mutable.Map(1 ->'a', 2->'b', 3->'c', 4->'d')
   println(x)
@@ -216,6 +216,9 @@ object mapTest{
   }
 
   println(userTwiceUpper("DIDI@hotmail.com"))
+
+
+
 
 
 
