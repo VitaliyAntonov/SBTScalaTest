@@ -65,6 +65,7 @@ class FolderIndex(val inClassPath: String) {
    */
   def scanFolder(pathUp: Array[String], nameFolder: String): Boolean = {
 
+    /** Возвращаемое значение */
     var retValue: Boolean = true
 
     /** Определяем путь к папке */

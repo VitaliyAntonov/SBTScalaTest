@@ -1,7 +1,7 @@
 package StringOperations
 
 import ScalaHelp.HelpString
-import UBTF.UbtfCreateCode
+import UBTF.UbtfCoreCode
 
 
 
@@ -12,7 +12,7 @@ import UBTF.UbtfCreateCode
 /**  HELP
  * Методы работы со строками  https://data-flair.training/blogs/scala-string-method/
  */
-object StringOptionsHelp extends App with UbtfCreateCode with HelpString {
+object StringOptionsHelp extends App with UbtfCoreCode with HelpString {
 
   val st = "Ayushi"
 
@@ -126,7 +126,7 @@ object StringOptionsHelp extends App with UbtfCreateCode with HelpString {
    * Для этого используется кодировка платформы по умолчанию.
    * */
   println("10. byte getBytes() - строка в последовательность байтов")
-  println("Ayushi".getBytes())
+  println("Ayushi".getBytes)
   // res44: Array[Byte] = Array(65, 121, 117, 115, 104, 105)
   println("ABCcba".getBytes())
   // res45: Array[Byte] = Array(65, 66, 67, 99, 98, 97)
@@ -560,6 +560,7 @@ object StringOptionsHelp extends App with UbtfCreateCode with HelpString {
 
   help_String.h1_charAt
   help_String.h2_compareTo
+  help_String.h8_equals
   val rez1234 = "asd".compareTo("asd")
 
 }

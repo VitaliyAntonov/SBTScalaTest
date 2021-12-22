@@ -163,9 +163,11 @@ trait ubtfSource{
 
   /** Преобразование массива типа Byte в HEX строку */
   def arrayByteToHexString(arr: Array[Byte]): String ={
-    var s = s"Array[Byte](${arr.length}) = ( "
-    arr.foreach(vByte => s += byteToHexString(vByte) + " ")
-    s += ")"
+    var s = s"Array[Byte](${arr.length})=0x("
+    for(i <- arr.indices){
+      if(i == (arr.length - 1)) s += byteToHexString(arr(i)) + ")"
+      else s += byteToHexString(arr(i)) + ","
+    }
     s
   }
 
@@ -185,13 +187,52 @@ object testUbtf extends App with ubtfSource {
   val rez = Array(1,2,3,4,5,6,7,8).zip("Worldes")
   rez.foreach{field => println("field1: " + field._1 + "   field2: " + field._2)}
 
-
+  println(IntUType(0xa0a1a2a3))
 
 
 
   val lLink = lengthByte(0x1FFFFFFFFFFFFFF7L)
 
   println(arrayByteToHexString(lLink))
+
+  val nULink = ULLink(0x1FFFFFFFFFFFFFF7L)
+  println(nULink)
+  val nULink1 = nULink.get
+  println(arrayByteToHexString(nULink1))
+  println(nULink.length)
+
+
+
+
+
+  println(ULLink(31) + ULLink(2))
+  println("uLLinkLength: " + ULLink(31).length)
+
+  println(ULLink(31) + 7)
+  println("uLLinkLength: " + (ULLink(31)+7).length)
+
+
+  val expr = BinOp("+", Var("b"), Var("c"))
+  inSelect(expr)
+
+
+  def inSelect(inval: Any)= inval match {
+    case BinOp(op, left, right) =>
+      println(inval + " является бинарной операцией")
+    case _ => println("Это не бинарная операция ")
+  }
+
+
+
+
+  abstract class Expr
+  case class Var(name: String) extends Expr
+  case class Number(num: Double) extends Expr
+  case class UnOp(operator: String, arg: Expr) extends Expr
+  case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
+
+
+
 
 
 

@@ -5,7 +5,7 @@ package UBTF
  *  Трэйт содержит основные функции
  *  для реализации UBTF формата
  */
-trait UbtfCreateCode {
+trait UbtfCoreCode {
 
   /** Формирование указателя типа UbtfType
    * Указатель типа представляет собой массив типа Array[Byte]
@@ -120,9 +120,21 @@ trait UbtfCreateCode {
 
   /** Преобразование массива типа Byte в HEX строку */
   def arrayByteToHexString(arr: Array[Byte]): String ={
-    var s = s"Array[Byte](${arr.length}) = ( "
-    arr.foreach(vByte => s += byteToHexString(vByte) + " ")
-    s += ")"
+    var s = s"Array[Byte](${arr.length})=0x("
+    for(i <- arr.indices){
+      if(i == (arr.length - 1)) s += byteToHexString(arr(i)) + ")"
+      else s += byteToHexString(arr(i)) + ","
+    }
+    s
+  }
+
+  /** Преобразование массива типа Byte в Hex строку, но без идентификатора массива */
+  def arrByteToHexStr(arr: Array[Byte]): String ={
+    var s = s"=0x("
+    for(i <- arr.indices){
+      if(i == (arr.length - 1)) s += byteToHexString(arr(i)) + ")"
+      else s += byteToHexString(arr(i)) + ","
+    }
     s
   }
 
