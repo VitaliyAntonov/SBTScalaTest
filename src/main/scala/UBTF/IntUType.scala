@@ -24,7 +24,6 @@ class IntUType(val inInt: Int) extends UType {
     result
   }
 
-
   override def toString: String = s"IntUBTF[Byte](${arrB.length})" + arrByteToHexStr(arrB)
 }
 /** UBTF формат типа Int - 4 байта */
