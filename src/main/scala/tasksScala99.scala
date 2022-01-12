@@ -113,6 +113,12 @@ object tasksScala0 {
   }
   def nonFu(a: Int): Int = a + 1
 
+  /** Возврат функции из метода */
+  val retFunc = (a:Int, b: Int) => a * b
+
+
+
+
 //  fixTimeInCycle(isPalindromeS(List(1,2,2,2,2,21,34,56)),100000)
   fixTimeInCycle(nonFu(1),1000)
 
@@ -183,7 +189,26 @@ object tasksScala0 {
 
 
 
+object testTasks99 extends App{
 
+  /** Проверка возврата функции из метода */
+  println("retFunc(3,7) = " + tasksScala0.retFunc(3,7))
+
+  /** Создание сокращённой записи функционального литерала */
+  println("Создание сокращённой записи функционального литерала ")
+  def sum(a: Int, b: Int, c: Int) = a + b + c
+  sum(1, 2, 3)
+  val a = sum _   /** частично применяемая функция */
+  println("a(1, 2, 3) = " + a(1, 2, 3))
+  /** можно выразить частично применяемую функцию,
+   * предоставив ей только некоторые из требуемых аргументов.
+   */
+  val b = sum(1, _: Int, 3)
+  println("b(2) = " + b(2))
+  println("b(5) = " + b(5))
+  println("\n")
+
+}
 
 
 

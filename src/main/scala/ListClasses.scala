@@ -186,7 +186,7 @@ object literalLists {
 
 
 // topic 17.2. Наборы и отображения
-object demoSet {
+object demoSet extends App {
 
   // topic Использование наборов
   val text = "See Spot run. Run, Spot. Run!"
