@@ -37,8 +37,11 @@ class FolderIndex(val inClassPath: String) {
 
   /** Отладка - вывод в лог списка файлов и путей к ним */
   def fileNameRoadToLog = {
+    println("Всего файлов в списке fileNameRoad: " + fileNameRoad.size)
+    var num = 0
     for ((fName, road) <- fileNameRoad){
-      print(fName + " -> ")
+      print(num + " " + fName + " -> ")
+      num += 1
       print(road.mkString("/"))
       println("")
     }
@@ -147,7 +150,8 @@ case class nameFileRoad(fileName: String, road: Array[String])
 
 
 object iFolderIndexTest extends App {
-  val fIndex = new FolderIndex("/home/vitaliy/develop/project/scala_student/SBTScalaTest/src/test/scala/pack_tails")
+//  val fIndex = new FolderIndex("/home/vitaliy/develop/project/scala_student/SBTScalaTest/src/test/scala/pack_tails")
+  val fIndex = new FolderIndex("C:\\Users\\user\\IdeaProjects\\SBTScalaTest\\src\\test\\scala\\pack_tails")
 
   fIndex.fileNameRoadToLog
 
