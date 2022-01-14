@@ -23,7 +23,7 @@ class FolderIndex(val inClassPath: String) {
   def fileNameRoad = fNameRoadMap.toMap
   private val fNameRoadMap = mutable.Map[String, Array[String]]()
 
-  /** Масив для фиксации файлов с одинаковыми именами */
+  /** Массив для фиксации файлов с одинаковыми именами */
   def doubleFileNames = doubleFilesBuffer.toArray
   private val doubleFilesBuffer = ArrayBuffer[nameFileRoad]()
 
