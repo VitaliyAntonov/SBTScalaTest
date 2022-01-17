@@ -1,15 +1,10 @@
 package folderIndex
 
+import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 
-/** Класс создаёт пирамиду тайлов для мелких масштабов
- * */
 
-/**
- *
- * @param path - путь к исходной пирамиде тайлов
- */
 
 /**
  *  Класс создаёт пирамиду тайлов для крупных масштабов
@@ -20,12 +15,10 @@ import scala.collection.mutable.ArrayBuffer
  * @param pyramidPath      - путь к исходной пирамиде тайлов
  * @param upScale   - масштаб(номер папки) от которого строим пирамиду тайлов вверх
  */
-class FineScaleTails(pyramidPath: String, upScale: Int) {
-
-
+class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
   /** delimiter Разделитель в пути к файлу в зависимости от Операционной системы */
-  val dm = {
+  val dm: String = {
     if (Util.getOS == Util.OS.WINDOWS) "\\"
     else "/"
   }
@@ -39,48 +32,100 @@ class FineScaleTails(pyramidPath: String, upScale: Int) {
   /** Функция создаёт пирамиду тайлов крупных масштабов */
   def mergeImagesAndSave = {
 
+    /** Сканируем директорию исходной пирамиды */
+    val scanSource = new FolderTileScan(pyramidPath)  // inFoldersTilesNames(pyramidPath)
+
+    /** сканируем папку с масштабом upScale */
+    val scanUpScale = new FolderTileScan(upScalePath)  // inFoldersTilesNames(upScalePath)
+
     /** Текущий файл - левый верхний */
     var numRow = 0          // Номер строки(имя папки)
     var numColumn = 0       // Номер столбца(имя файла)
 
-    var activePath = ""     /** путь к обрабатываемой папке */
-
-    var upLeftPath = ""     // Путь к файлу верхний левый
-    var upRightPath = ""    // верхний правый
-    var downLeftPath = ""   // нижний левый
-    var downRightPath = ""  // нижний правый
+    var activePathUp = ""     /** путь к обрабатываемой папке - ВЕРХНЯЯ СТРОКА */
+    var activePathDown = ""   /** путь к обрабатываемой папке - Нижняя строка */
 
 
-    /** Сканируем директорию исходной пирамиды */
-    val scanSource = inFoldersNames(pyramidPath)
 
-    /** сканируем папку с масштабом upScale */
-    val scanUpScale = inFoldersNames(upScalePath)
+
+
 
     /** номер обрабатываемой папки(строки)  */
-    numRow = scanUpScale._1.minBy(x => x.toInt).toInt
+    numRow = scanUpScale.foldersList(0).toInt
 
-    /** путь к папке с минимальным номером, содержащей тайлы */
+    /** путь к папке с минимальным номером, содержащей тайлы - первая строка */
     val minFolderPath = {
       /** Ищем первую НЕ пустую папку */
       var fExit = 0
-      val max = scanUpScale._1.maxBy(x => x.toInt).toInt
+      val max = scanUpScale.foldersList.maxBy(x => x.toInt).toInt
       while(fExit == 0 && numRow <= max){
-        activePath = upScalePath + dm + numRow.toString
-        if(inFoldersNames(activePath)._2.nonEmpty) fExit = 1
+        activePathUp = upScalePath + dm + numRow.toString
+        if(inFoldersNames(activePathUp)._2.nonEmpty) fExit = 1
         else numRow += 1
       }
-      activePath
+      activePathUp
+    }
+    /** Номер первой НЕПУСТОЙ папки с тайлами */
+    val firstRowNum = minFolderPath.slice(minFolderPath.lastIndexOf(dm) + 1, minFolderPath.length).toInt
+    /** Используем диапазон строк - нимимальный и максимальный номера папок в папке scanUpScale */
+    val maxNumRow = scanUpScale.foldersList(scanUpScale.foldersList.length - 1).toInt
+
+    /** цикл по строкам */
+    for(numRow <- firstRowNum until maxNumRow by 2){
+      /** путь к папке ВЕРХНЕЙ СТРОКИ по номеру */
+      val upRow = upScalePath + dm + numRow.toString
+      /** путь к папке нижней строки по номеру */
+      val downRow = upScalePath + dm + (numRow + 1).toString
+
+      /** сканируем папки - списки файлов */
+      val upScan = new FolderTileScan(upRow)
+      val downScan = new FolderTileScan(downRow)
+
+      /** создаём общий список номеров файлов в верхней и нижней папках(строках)
+       * чтобы использовать минимальный и максимальный номера файлов*/
+      val numList = (upScan.filesNum.toSet ++ downScan.filesNum.toSet).toArray.sortBy(w => w)
+
+      /** цикл по столбцам(тайлам в папке) */
+      print(s"Row = $numRow Column = ")
+      for(column <- numList(0) until numList.last by 2){
+        val leftUpPath = upRow + dm + column.toString
+        val rightUpPath = upRow + dm + (column + 1).toString
+        val leftDownPath = downRow + dm + column.toString
+        val rightDownPath = downRow + dm + (column + 1).toString
+        /** проверка наличия файла по указанному пути
+         * Если файл присутствует, загружаем его,
+         * если файла нет, загружаем прозрачный файл empty.png */
+
+
+
+
+      }
+
+
+
+
+
     }
 
 
 
 
 
+
+
+
     // отладка
-    for (x <- scanSource._1) println(x) // скан исходно пирамиды
-    for (x <- scanUpScale._1) println(x) // скан исходной папки для построения пирамиды вверх
+    println("Source Pyramid ")
+    for (x <- scanSource.foldersList) println(x) // скан исходной пирамиды
+    for (x <- scanUpScale.foldersList) println(x) // скан исходной папки для построения пирамиды вверх
     println(minFolderPath) // путь к папке с минимальным номером
+    for(x <- inFoldersNames(activePathUp)._2) println(x) // список рисунков в папке
+//    println("minNumRow = " + minNumRow)
+//    println("maxNumRow = " + maxNumRow)
+//    println("numColumnMin = " + numColumnMin)
+//    println("numColumnMax = " + numColumn)
+
+
     // ------------------
   }
 
@@ -112,39 +157,15 @@ class FineScaleTails(pyramidPath: String, upScale: Int) {
   }
 
 
-  /**
-   * Функция создаёт список имён папок и файлов, расположенных внутри указанной директории
-   * @param inPath   - директория для сканирования
-   * @return      - Список имён папок
-   */
-  def inFoldersNames(inPath: String): (Array[String], Array[String]) = {
-    val pathsNames = ArrayBuffer[String]() // список имён вложенных папок
-    val filesNames = ArrayBuffer[String]() // список имён файлов в папке
 
-    /** создание экземпляра File для директории */
-    val pathTab = new java.io.File(inPath)
-    if(pathTab.isDirectory) { // если папка существует
-      /** обход объектов в папке */
-      for (obj ← pathTab.listFiles){
-        /** обработка файлов */
-        if(obj.isFile) filesNames += obj.getName
-        /** обработка папок */
-        if(obj.isDirectory) pathsNames += obj.getName
-      }
-    }
-
-    Tuple2(pathsNames.toArray.sortBy(w => w.toInt), filesNames.toArray.sortBy(w => w.slice(0,w.indexOf(".")).toInt ))
-  }
 
   /** Метод определяет пути к файлам рисунков, которые объединяются */
   def setPathsImages = {
 
   }
 
-
-
-
 }
+
 
 
 

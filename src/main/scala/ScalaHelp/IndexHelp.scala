@@ -3,6 +3,19 @@ package ScalaHelp
 /** Общий индекс информационных файлов SCALA */
 class IndexHelp {
 
+  /** На вершине иерархии коллекций находится трейт Traversable.
+   * Его единственной абстрактной операцией является foreach
+   * Scala - профессиональное программирование
+   * Таблица 24.1. Операции в трейте Traversable */
+  TraversableInfo.foreach_help
+  TraversableInfo.add_help
+  TraversableInfo.map_help
+  TraversableInfo.flatMap_help
+  TraversableInfo.collect_help
+
+
+
+
   /** Методы последовательностей типа Seq */
   /** Scala - профессиональное программирование. Таблица 24.3 - Операции в трейте Seq */
   // Индексирования и длины
