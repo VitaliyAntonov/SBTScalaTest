@@ -232,7 +232,7 @@ class TailsRefactor(sourcePathName: String, outPathName: String) {
     g.drawImage(image, 0, 0, null);
     g.drawImage(overlay, 0, 0, null);
 
-    g.dispose();
+    g.dispose()
 
     // Save as new image
     ImageIO.write(combined, "PNG", new java.io.File(resultFolder, fileNameFromPath(resultPath)));

@@ -1,7 +1,11 @@
 package folderIndex
 
+import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
+
 
 
 
@@ -17,23 +21,33 @@ import scala.collection.mutable.ArrayBuffer
  */
 class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
-  /** delimiter Разделитель в пути к файлу в зависимости от Операционной системы */
-  val dm: String = {
-    if (Util.getOS == Util.OS.WINDOWS) "\\"
-    else "/"
+
+
+  createPyramydScale // Создаём пирамиду тайлов от текущего масштаба до 0-го
+
+  /** Функция строит всю пирамиду от заданного масштаба до 0-го */
+  def createPyramydScale = {
+    for(num <- upScale to 1 by -1){
+      mergeImagesAndSave(num)
+    }
   }
 
-  /** Путь к папке с масштабом upScale */
-  val upScalePath: String = {
-    if (pyramidPath.endsWith(dm)) pyramidPath + upScale.toString
-    else pyramidPath + dm + upScale.toString
-  }
+  /**
+   * Функция создаёт слой пирамиды тайлов крупных масштабов
+   * @param actualPath - Номер сканируемого масштаба(номер/имя папки)
+   */
+  def mergeImagesAndSave(actualPath: Int) = {
 
-  /** Функция создаёт пирамиду тайлов крупных масштабов */
-  def mergeImagesAndSave = {
+    /** Путь к папке с масштабом actualPath */
+    val upScalePath: String = {
+      if (pyramidPath.endsWith(dm)) pyramidPath + actualPath.toString
+      else pyramidPath + dm + actualPath.toString
+    }
 
-    /** Сканируем директорию исходной пирамиды */
-    val scanSource = new FolderTileScan(pyramidPath)  // inFoldersTilesNames(pyramidPath)
+
+    /** Создаём папку для сохранения верхнего слоя пирамиды */
+    val savePath = pyramidPath + dm + (actualPath - 1).toString
+    newPathCreate(savePath)
 
     /** сканируем папку с масштабом upScale */
     val scanUpScale = new FolderTileScan(upScalePath)  // inFoldersTilesNames(upScalePath)
@@ -46,12 +60,8 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
     var activePathDown = ""   /** путь к обрабатываемой папке - Нижняя строка */
 
 
-
-
-
-
     /** номер обрабатываемой папки(строки)  */
-    numRow = scanUpScale.foldersList(0).toInt
+//    numRow = scanUpScale.foldersList(0).toInt
 
     /** путь к папке с минимальным номером, содержащей тайлы - первая строка */
     val minFolderPath = {
@@ -67,11 +77,15 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
     }
     /** Номер первой НЕПУСТОЙ папки с тайлами */
     val firstRowNum = minFolderPath.slice(minFolderPath.lastIndexOf(dm) + 1, minFolderPath.length).toInt
+
+    logCount = 0 // обнуляем счётчик шкалы прогресса
+    println("")
+
     /** Используем диапазон строк - нимимальный и максимальный номера папок в папке scanUpScale */
     val maxNumRow = scanUpScale.foldersList(scanUpScale.foldersList.length - 1).toInt
 
     /** цикл по строкам */
-    for(numRow <- firstRowNum until maxNumRow by 2){
+    for(numRow <- firstRowNum to maxNumRow by 2){
       /** путь к папке ВЕРХНЕЙ СТРОКИ по номеру */
       val upRow = upScalePath + dm + numRow.toString
       /** путь к папке нижней строки по номеру */
@@ -81,30 +95,65 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
       val upScan = new FolderTileScan(upRow)
       val downScan = new FolderTileScan(downRow)
 
+      val emptyPath = "."+ dm + "src/main/scala/folderIndex".split("/").mkString(dm)
+
+      /** путь к папке для сохранения строки масштаба */
+      val divRowPath: String = savePath + dm + (numRow/2).toString
+      newPathCreate(divRowPath) // создаём дирректорию
+
+      /** Путь для сохранения рисунка при тестировании */
+      val outPath = "."+ dm + "src/test/scala".split("/").mkString(dm)
+
       /** создаём общий список номеров файлов в верхней и нижней папках(строках)
        * чтобы использовать минимальный и максимальный номера файлов*/
       val numList = (upScan.filesNum.toSet ++ downScan.filesNum.toSet).toArray.sortBy(w => w)
 
       /** цикл по столбцам(тайлам в папке) */
-      print(s"Row = $numRow Column = ")
-      for(column <- numList(0) until numList.last by 2){
-        val leftUpPath = upRow + dm + column.toString
-        val rightUpPath = upRow + dm + (column + 1).toString
-        val leftDownPath = downRow + dm + column.toString
-        val rightDownPath = downRow + dm + (column + 1).toString
+      for(column <- numList(0) to numList.last by 2){
+        val leftUpPath = upRow + dm + column.toString + ".png"
+        val rightUpPath = upRow + dm + (column + 1).toString + ".png"
+        val leftDownPath = downRow + dm + column.toString + ".png"
+        val rightDownPath = downRow + dm + (column + 1).toString + ".png"
         /** проверка наличия файла по указанному пути
          * Если файл присутствует, загружаем его,
          * если файла нет, загружаем прозрачный файл empty.png */
 
+        val images = ArrayBuffer[BufferedImage]() /** Буфер для 4-х рисунков */
+        /** Проверяем существует ли файл и загружаем в буфер по соответствующему пути */
+        if(new File(leftUpPath).isFile) images += ImageIO.read(new java.io.File(upRow, column.toString + ".png"))
+        else images += ImageIO.read(new java.io.File(emptyPath, "empty.png"))
 
+        if(new File(rightUpPath).isFile) images += ImageIO.read(new java.io.File(upRow, (column + 1).toString + ".png"))
+        else images += ImageIO.read(new java.io.File(emptyPath, "empty.png"))
 
+        if(new File(leftDownPath).isFile) images += ImageIO.read(new java.io.File(downRow, column.toString + ".png"))
+        else images += ImageIO.read(new java.io.File(emptyPath, "empty.png"))
 
+        if(new File(rightDownPath).isFile) images += ImageIO.read(new java.io.File(downRow, (column + 1).toString + ".png"))
+        else images += ImageIO.read(new java.io.File(emptyPath, "empty.png"))
+
+        val combined = new BufferedImage(512, 512, BufferedImage.TYPE_INT_ARGB) // исходный для resize
+        val g = combined.getGraphics
+        g.drawImage(images(0), 0, 0, null)
+        g.drawImage(images(1), 256, 0, null)
+        g.drawImage(images(2), 0, 256, null)
+        g.drawImage(images(3), 256, 256, null)
+        g.dispose() // освобождение памяти объекта
+
+        val sizeImage256 = new BufferedImage(256, 256, BufferedImage.TYPE_INT_ARGB)
+        val resizeG = sizeImage256.getGraphics
+        /** отрисовка в буфер sizeImage256 рисунка combined с уменьшенными размерами  */
+        resizeG.drawImage(combined, 0, 0, 256, 256, null)
+        resizeG.dispose() // освобождение памяти объекта
+
+        /** РЕЗУЛЬТАТ sizeImage256 - рисунок для сохранения
+         * определяем имя рисунка */
+          val imageName = (column/2).toString + ".png"
+        /** Сохраняем рисунок */
+        ImageIO.write(sizeImage256, "PNG", new java.io.File(divRowPath, imageName))
+
+        logCount = logProgress(logCount) // шкала прогресса в логе
       }
-
-
-
-
-
     }
 
 
@@ -115,11 +164,11 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
 
     // отладка
-    println("Source Pyramid ")
-    for (x <- scanSource.foldersList) println(x) // скан исходной пирамиды
-    for (x <- scanUpScale.foldersList) println(x) // скан исходной папки для построения пирамиды вверх
-    println(minFolderPath) // путь к папке с минимальным номером
-    for(x <- inFoldersNames(activePathUp)._2) println(x) // список рисунков в папке
+//    println("Source Pyramid ")
+//    for (x <- scanSource.foldersList) println(x) // скан исходной пирамиды
+//    for (x <- scanUpScale.foldersList) println(x) // скан исходной папки для построения пирамиды вверх
+//    println(minFolderPath) // путь к папке с минимальным номером
+//    for(x <- inFoldersNames(activePathUp)._2) println(x) // список рисунков в папке
 //    println("minNumRow = " + minNumRow)
 //    println("maxNumRow = " + maxNumRow)
 //    println("numColumnMin = " + numColumnMin)
@@ -129,40 +178,6 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
     // ------------------
   }
 
-
-  /**
-   * Функция возвращает путь, сформированный из pyramidPath и номера папки
-   * @param num  - номер папки, которую необходимо создать
-   */
-  def pathNumberName(num: Int): String ={
-    if (pyramidPath.endsWith(dm)) pyramidPath + num.toString
-    else pyramidPath + dm + num.toString
-  }
-
-  /**
-   * Создание директории с указанным путём, если директория ещё не создана
-   * @param newPath номер директории, от которой идём вверх по пирамиде тайлов
-   */
-  def newPathCreate(newPath: String): Unit ={
-    /** Проверка, существует ли директория с полученным путём */
-    val pathTab = new java.io.File(newPath)
-//    import java.nio.file.Files
-//    import java.nio.file.Paths
-    if(!pathTab.isDirectory) {    // директория не существует
-//      Files.createDirectory(Paths.get(newPath))  // Создание директории(импорты для этой команды)
-      /** Создаём директорию */
-      val f = new java.io.File(newPath)
-      f.mkdirs()
-    }
-  }
-
-
-
-
-  /** Метод определяет пути к файлам рисунков, которые объединяются */
-  def setPathsImages = {
-
-  }
 
 }
 
@@ -194,7 +209,7 @@ object TestFineScaleTails extends App{
 //  for(s <- sorted) print(s + " ")
 
 
-  tFileScale.mergeImagesAndSave
+//  tFileScale.mergeImagesAndSave(10)
 
 }
 
