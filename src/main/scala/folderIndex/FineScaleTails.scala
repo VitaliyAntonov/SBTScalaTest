@@ -52,31 +52,13 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
     /** сканируем папку с масштабом upScale */
     val scanUpScale = new FolderTileScan(upScalePath)  // inFoldersTilesNames(upScalePath)
 
-    /** Текущий файл - левый верхний */
-    var numRow = 0          // Номер строки(имя папки)
-    var numColumn = 0       // Номер столбца(имя файла)
-
-    var activePathUp = ""     /** путь к обрабатываемой папке - ВЕРХНЯЯ СТРОКА */
-    var activePathDown = ""   /** путь к обрабатываемой папке - Нижняя строка */
-
-
-    /** номер обрабатываемой папки(строки)  */
-//    numRow = scanUpScale.foldersList(0).toInt
-
-    /** путь к папке с минимальным номером, содержащей тайлы - первая строка */
-    val minFolderPath = {
-      /** Ищем первую НЕ пустую папку */
-      var fExit = 0
-      val max = scanUpScale.foldersList.maxBy(x => x.toInt).toInt
-      while(fExit == 0 && numRow <= max){
-        activePathUp = upScalePath + dm + numRow.toString
-        if(inFoldersNames(activePathUp)._2.nonEmpty) fExit = 1
-        else numRow += 1
+    /** Номер первой папки(строки) в цикле всегда чётный */
+    val honestNumber = {
+      if((scanUpScale.foldersList.head.toInt % 2) == 0){   // номер первой папки чётный
+        scanUpScale.foldersList.head.toInt
       }
-      activePathUp
+      else scanUpScale.foldersList.head.toInt - 1
     }
-    /** Номер первой НЕПУСТОЙ папки с тайлами */
-    val firstRowNum = minFolderPath.slice(minFolderPath.lastIndexOf(dm) + 1, minFolderPath.length).toInt
 
     logCount = 0 // обнуляем счётчик шкалы прогресса
     println("")
@@ -85,7 +67,7 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
     val maxNumRow = scanUpScale.foldersList(scanUpScale.foldersList.length - 1).toInt
 
     /** цикл по строкам */
-    for(numRow <- firstRowNum to maxNumRow by 2){
+    for(numRow <- honestNumber to maxNumRow by 2){
       /** путь к папке ВЕРХНЕЙ СТРОКИ по номеру */
       val upRow = upScalePath + dm + numRow.toString
       /** путь к папке нижней строки по номеру */
@@ -95,6 +77,7 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
       val upScan = new FolderTileScan(upRow)
       val downScan = new FolderTileScan(downRow)
 
+      /** Путь к пустому прозрачному рисунку */
       val emptyPath = "."+ dm + "src/main/scala/folderIndex".split("/").mkString(dm)
 
       /** путь к папке для сохранения строки масштаба */
@@ -108,8 +91,14 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
        * чтобы использовать минимальный и максимальный номера файлов*/
       val numList = (upScan.filesNum.toSet ++ downScan.filesNum.toSet).toArray.sortBy(w => w)
 
+      /** номер первого рисунка(столбец/тайл) всегда чётный */
+      val honestColumn = {
+        if((numList(0) % 2) == 0) numList(0)
+        else numList(0) - 1 // если в папке нечётный уменьшаем номер на 1
+      }
+
       /** цикл по столбцам(тайлам в папке) */
-      for(column <- numList(0) to numList.last by 2){
+      for(column <- honestColumn to numList.last by 2){
         val leftUpPath = upRow + dm + column.toString + ".png"
         val rightUpPath = upRow + dm + (column + 1).toString + ".png"
         val leftDownPath = downRow + dm + column.toString + ".png"
@@ -187,7 +176,13 @@ class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
 
 object TestFineScaleTails extends App{
+
+
+//  C:\D\maps\osm_test\2
   val tFileScale = new FineScaleTails("C:\\D\\maps\\rTails\\m200\\GoogleMapsCompatible", 10)
+
+//  val tFileScale = new FineScaleTails("C:\\D\\maps\\osm_test", 2)
+
 
 //  C:\D\maps\rTails\m200\GoogleMapsCompatible\12
 // C:\D\maps\rTails\m200\GoogleMapsCompatible\12\1221
