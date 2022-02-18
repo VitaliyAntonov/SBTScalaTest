@@ -17,7 +17,7 @@ import scala.collection.mutable.ArrayBuffer
  *
  * 0000000318_0000000648.png -> (3901, GoogleMapsCompatible, 10, 318)
  */
-class FolderIndex(val inClassPath: String) {
+class FolderIndex(val inClassPath: String) extends FileSystem {
 
   /** Map соответствие Имя файла -> Путь, как Массив имён папок в порядке вложенности, начиная от path */
   def fileNameRoad = fNameRoadMap.toMap
@@ -42,7 +42,7 @@ class FolderIndex(val inClassPath: String) {
     for ((fName, road) <- fileNameRoad){
       print(num + " " + fName + " -> ")
       num += 1
-      print(road.mkString("/"))
+      print(road.mkString(dm))
       println("")
     }
   }
@@ -74,8 +74,8 @@ class FolderIndex(val inClassPath: String) {
     /** Определяем путь к папке */
     val path: String = {
       var s = inClassPath
-      if(pathUp.nonEmpty) s += "/" + pathUp.mkString("/")
-      if(nameFolder != "") s += "/" + nameFolder
+      if(pathUp.nonEmpty) s += dm + pathUp.mkString(dm)
+      if(nameFolder != "") s += dm + nameFolder
       s
     }
 
@@ -143,10 +143,11 @@ class FolderIndex(val inClassPath: String) {
 
     retValue
   }
+
+
 }
 
-/** класс для фиксации имени файла и массива имён папок на пути к нему */
-case class nameFileRoad(fileName: String, road: Array[String])
+
 
 
 object iFolderIndexTest extends App {

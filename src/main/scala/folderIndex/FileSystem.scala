@@ -1,5 +1,7 @@
 package folderIndex
 
+import java.io.File
+import java.nio.file.Files
 import scala.collection.mutable.ArrayBuffer
 
 
@@ -65,8 +67,7 @@ trait FileSystem {
    * @return
    */
   def fileNameFromPath(path: String): String ={
-    val pathSplit = path.split("/+" )
-    pathSplit(pathSplit.length - 1)
+    path.slice(path.lastIndexOf(dm) + 1, path.length)
   }
 
   /**
@@ -75,8 +76,7 @@ trait FileSystem {
    * @return
    */
   def folderFromFilePath(path: String): String ={
-    val pathSplit = path.split("/+" )
-    pathSplit.init.mkString("/")
+    path.slice(0, path.lastIndexOf(dm))
   }
 
   /**
@@ -93,5 +93,31 @@ trait FileSystem {
     }
   }
 
+  /**
+   * Функция копирования файлов
+   * путь к месту копирования уже должен существовать
+   * @param source - путь к исходному файлу
+   * @param dest   - путь к новому месту файла
+   * @return
+   */
+  def copyFile(source: String , dest: String) = {
+    val fSource = new File(source)
+    val fDest = new File(dest)
+    Files.copy(fSource.toPath, fDest.toPath)
+  }
+
+
+  /** класс для фиксации имени файла и массива имён папок на пути к нему */
+  case class nameFileRoad(fileName: String, road: Array[String]){
+    /** путь к файлу, начинающийся с разделителя */
+    def path: String = {
+      var s = dm
+      for(x <- road.indices){
+        if(x < (road.length - 1)) s += road(x) + dm
+        else s += road(x) + dm + fileName
+      }
+      s
+    }
+  }
 
 }

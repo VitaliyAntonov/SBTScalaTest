@@ -19,7 +19,7 @@ import scala.collection.mutable.ArrayBuffer
  * @param pyramidPath      - путь к исходной пирамиде тайлов
  * @param upScale   - масштаб(номер папки) от которого строим пирамиду тайлов вверх
  */
-class FineScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
+class AllScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
 
 
@@ -179,7 +179,8 @@ object TestFineScaleTails extends App{
 
 
 //  C:\D\maps\osm_test\2
-  val tFileScale = new FineScaleTails("C:\\D\\maps\\rTails\\m200\\GoogleMapsCompatible", 10)
+//  val tFileScale = new FineScaleTails("C:\\D\\maps\\rTails\\m200\\GoogleMapsCompatible", 10)
+  val tFileScale = new AllScaleTails("E:\\resultTiles", 10)
 
 //  val tFileScale = new FineScaleTails("C:\\D\\maps\\osm_test", 2)
 

@@ -5,7 +5,7 @@ import scala.language.postfixOps
 
 /**
  * Класс сканирует папку для последующего слияния рисунков тайлов
- *
+ * Представляет списки файлов и папок, отсортированных в порядке нумерации
  * @param folderPath
  */
 class FolderTileScan(val folderPath: String) extends FileSystem {
