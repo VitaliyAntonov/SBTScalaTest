@@ -37,7 +37,7 @@ class ImageryFileList(val pathsList: Array[String]) {
     for(field <- fIndex.fileNameRoad){ // обход списка файлов
       if(field._1.toLowerCase().endsWith(".sitx")){ // расширение файла .sitx
         // формируем путь к файлу
-        val filePath: String = path + "\\" + field._2.mkString("\\") + "\\" + field._1
+        val filePath: String = path + "\\" + field._2.mkString("\\") + field._1
         fileSitxArrBuffer += filePath  // путь в список найденных файлов
         val fstr = s"""<Map Path="$filePath"/>\n"""
         strFileListBuffer += fstr
@@ -70,11 +70,71 @@ object TestImageryFileList extends App {
 //    "E:\\tiles\\200000\\200000\\M41",
 //  ))
 
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\N42",
+//    "E:\\tiles\\200000\\200000\\O42",
+//    "E:\\tiles\\200000\\200000\\M42"
+//  ))
+
+//    val testClass = new ImageryFileList(Array(
+//      "E:\\tiles\\200000\\200000\\O36",
+//      "E:\\tiles\\200000\\200000\\O37",
+//      "E:\\tiles\\200000\\200000\\N36",
+//      "E:\\tiles\\200000\\200000\\N37",
+//      "E:\\tiles\\200000\\200000\\M36",
+//      "E:\\tiles\\200000\\200000\\M37"
+//    ))
+
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\O34",
+//    "E:\\tiles\\200000\\200000\\O35",
+//    "E:\\tiles\\200000\\200000\\N34",
+//    "E:\\tiles\\200000\\200000\\N35",
+//    "E:\\tiles\\200000\\200000\\M34",
+//    "E:\\tiles\\200000\\200000\\M35"
+//  ))
+
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\R35",
+//    "E:\\tiles\\200000\\200000\\R36",
+//    "E:\\tiles\\200000\\200000\\Q35",
+//    "E:\\tiles\\200000\\200000\\Q36",
+//    "E:\\tiles\\200000\\200000\\P35",
+//    "E:\\tiles\\200000\\200000\\P36"
+//  ))
+
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\L34",
+//    "E:\\tiles\\200000\\200000\\L35",
+//    "E:\\tiles\\200000\\200000\\K34",
+//    "E:\\tiles\\200000\\200000\\K35",
+//    "E:\\tiles\\200000\\200000\\J34",
+//    "E:\\tiles\\200000\\200000\\J35"
+//  ))
+
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\L36",
+//    "E:\\tiles\\200000\\200000\\L37",
+//    "E:\\tiles\\200000\\200000\\L38",
+//    "E:\\tiles\\200000\\200000\\K36",
+//    "E:\\tiles\\200000\\200000\\K37",
+//    "E:\\tiles\\200000\\200000\\K38"
+//  ))
+
+//  val testClass = new ImageryFileList(Array(
+//    "E:\\tiles\\200000\\200000\\O43",
+//    "E:\\tiles\\200000\\200000\\O44",
+//    "E:\\tiles\\200000\\200000\\N43",
+//    "E:\\tiles\\200000\\200000\\N44",
+//    "E:\\tiles\\200000\\200000\\M43",
+//    "E:\\tiles\\200000\\200000\\M44"
+//  ))
+
   val testClass = new ImageryFileList(Array(
-    "E:\\tiles\\200000\\200000\\N42",
-    "E:\\tiles\\200000\\200000\\O42",
-    "E:\\tiles\\200000\\200000\\M42"
+    "E:\\tiles\\200000\\200000\\L39",
+    "E:\\tiles\\200000\\200000\\K39"
   ))
+
 
   println("Всего файлов .sitx " + testClass.fileSitxArr.length)
   println(testClass.strFileListBuffer)

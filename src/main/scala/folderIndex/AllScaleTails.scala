@@ -21,8 +21,6 @@ import scala.collection.mutable.ArrayBuffer
  */
 class AllScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
-
-
   createPyramydScale // Создаём пирамиду тайлов от текущего масштаба до 0-го
 
   /** Функция строит всю пирамиду от заданного масштаба до 0-го */
@@ -84,9 +82,6 @@ class AllScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
       val divRowPath: String = savePath + dm + (numRow/2).toString
       newPathCreate(divRowPath) // создаём дирректорию
 
-      /** Путь для сохранения рисунка при тестировании */
-      val outPath = "."+ dm + "src/test/scala".split("/").mkString(dm)
-
       /** создаём общий список номеров файлов в верхней и нижней папках(строках)
        * чтобы использовать минимальный и максимальный номера файлов*/
       val numList = (upScan.filesNum.toSet ++ downScan.filesNum.toSet).toArray.sortBy(w => w)
@@ -137,7 +132,7 @@ class AllScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
         /** РЕЗУЛЬТАТ sizeImage256 - рисунок для сохранения
          * определяем имя рисунка */
-          val imageName = (column/2).toString + ".png"
+        val imageName = (column/2).toString + ".png"
         /** Сохраняем рисунок */
         ImageIO.write(sizeImage256, "PNG", new java.io.File(divRowPath, imageName))
 
@@ -177,35 +172,8 @@ class AllScaleTails(pyramidPath: String, upScale: Int) extends FileSystem {
 
 object TestFineScaleTails extends App{
 
-
-//  C:\D\maps\osm_test\2
-//  val tFileScale = new FineScaleTails("C:\\D\\maps\\rTails\\m200\\GoogleMapsCompatible", 10)
   val tFileScale = new AllScaleTails("E:\\resultTiles", 10)
 
-//  val tFileScale = new FineScaleTails("C:\\D\\maps\\osm_test", 2)
-
-
-//  C:\D\maps\rTails\m200\GoogleMapsCompatible\12
-// C:\D\maps\rTails\m200\GoogleMapsCompatible\12\1221
-
-//  println(tFileScale.dm)
-//  println(tFileScale.upScalePath)
-//
-//  val list2 = tFileScale.inFoldersNames("C:\\D\\maps\\rTails\\m200\\GoogleMapsCompatible\\12\\1221")
-//  for(name <- list2._1) println(name + " "); println("")
-//  for(name <- list2._2){
-//    print(name.slice(0,name.indexOf(".")).toInt + " ")
-//    println(name)
-//  }
-
-
-//  val words = "55 22 33 44 31 22".split(" ")
-//  val sorted = words.sortBy(w => w.length -> w.toLowerCase)
-//
-//  for(s <- sorted) print(s + " ")
-
-
-//  tFileScale.mergeImagesAndSave(10)
 
 }
 
