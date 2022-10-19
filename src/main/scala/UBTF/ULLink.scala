@@ -59,7 +59,7 @@ class ULLink(val lengthField: Long) extends Ubtf {
   }
 
 }
-/** Объект для конструктора LLink без new */
+/** Указатель длины для поля данных */
 object ULLink{
 
   def apply(lengthField: Long) = {

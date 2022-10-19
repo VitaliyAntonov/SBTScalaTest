@@ -1,0 +1,28 @@
+
+:root {
+   --bodyBgColor: #000000;
+   --bodyTextColor: #ffffff;
+}
+
+body {
+    background-color: var(--bodyBgColor);
+    color: var(--bodyTextColor);
+}
+
+.DivBox {
+  border: 1px solid yellow;
+  border-radius: 5px;
+}
+
+#DivBox0 {
+  width: 200px;
+  height: 200px;
+  background-color: hsl(220, 34%, 50%);
+}
+
+#DivBox1 {
+  width: 200px;
+  height: 200px;
+  background-color: hsl(220, 34%, 50%);
+}
+

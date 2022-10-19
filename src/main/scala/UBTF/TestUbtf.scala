@@ -5,6 +5,8 @@ package UBTF
 
 object TestUbtf extends App {
 
+  val lengthLink = ULLink(0x8001L)
+
   println(ULLink(0x8001L))
 
   for(i <- 0x1FFFF0 to 0x200005){

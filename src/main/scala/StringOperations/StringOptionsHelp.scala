@@ -566,5 +566,13 @@ object StringOptionsHelp extends App with UbtfCoreCode with HelpString {
 }
 
 
+object testStrOption extends App{
+  val txt = "Ч Е Р Н О Е М О Р Е"
+  val out = txt.split(" ")//.filter(_ != " ")
+  println("в массиве " + out.length + " элементов")
+  for(t <- out){
+    println(t)
+  }
 
+}
 

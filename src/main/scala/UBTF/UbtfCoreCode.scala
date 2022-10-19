@@ -2,7 +2,7 @@ package UBTF
 
 
 /**
- *  Трэйт содержит основные функции
+ *  Трейт содержит основные функции
  *  для реализации UBTF формата
  */
 trait UbtfCoreCode {
@@ -19,7 +19,7 @@ trait UbtfCoreCode {
 
 
  /** Формирование указателя длины, который присоединится
-   * к массиву длиной lField
+   * к массиву длиной lField при формировании массива типа UBTF
    *
    * Указатель длины представляет собой массив типа Array[Byte]
    * длиной от 1 до 8 байт
@@ -163,7 +163,7 @@ trait UbtfCoreCode {
    */
   def arrayByteToLong(b: Array[Byte]): Long = {
     if(b.length > 8){
-      throw new IllegalArgumentException(" >>> Трэйт UbtfCreateCode функция arrayByteToLong \n длина входящего массива больше 8 байт")
+      throw new IllegalArgumentException(" >>> Трейт UbtfCreateCode функция arrayByteToLong \n длина входящего массива больше 8 байт")
     }
     var result = 0L
     for (i <- b.indices) {
