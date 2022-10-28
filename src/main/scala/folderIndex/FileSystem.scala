@@ -109,7 +109,8 @@ trait FileSystem {
 
   /** класс для фиксации имени файла и массива имён папок на пути к нему */
   case class nameFileRoad(fileName: String, road: Array[String]){
-    /** путь к файлу, начинающийся с разделителя */
+
+    /** Функция возвращает путь к файлу, начинающийся с разделителя */
     def path: String = {
       var s = dm
       for(x <- road.indices){
